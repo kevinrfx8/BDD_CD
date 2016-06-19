@@ -17,9 +17,12 @@
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
-
         <link rel="stylesheet" href="../bower_components/bootstrap/less/bootstrap.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
+        <link rel="stylesheet" href="../bower_components/bootstrap/less/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="../bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,30 +34,79 @@
 
     <body ng-controller="controller">
         <?php require('templates/header.php');?>
-
-
             <main>
                 <div class="container">
                     <h2>Ver Vuelos</h2>
                     <div class="row">
                         <form class="col s12" id="filtros">
                            <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
+        <!-- fecha salida -->
+         <div class='col-sm-2'>            
+                <p> 
+                
+                <span class="fa fa-calendar"></span>
+                <label for="sel1">Fecha Salida</label>
+                <input type="text" id="datepicker" placeholder="Seleccionar...">
+                    
+                </p>                         
         </div>
+<!-- Edo Salida -->
+ <div class='col-sm-2'>
+<div class="form-group">
+  <label for="sel1">Edo Salida</label>
+  <select class="form-control" id="sel1">
+    <option>TE ODIO KEV</option>
+  </select>
+</div>         
+ </div>
+                               
+<!-- Edo Llegada -->
+ <div class='col-sm-2'>
+<div class="form-group">
+  <label for="sel1">Edo Llegada</label>
+  <select class="form-control" id="sel1">
+    <option>TE ODIO KEV</option>
+  </select>
+</div>         
+ </div>
+
+<!-- Aerolinea -->
+ <div class='col-sm-2'>
+<div class="form-group">
+  <label for="sel1">Aerolinea</label>
+  <select class="form-control" id="sel1">
+    <option>TE ODIO KEV</option>
+  </select>
+</div>         
+ </div>
+                               
+<!--Boton Buscar -->
+<div class='col-sm-2'>                               
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default">Buscar</button>
+</div>                               
         <script type="text/javascript">
             $(function () {
                 $('#datetimepicker1').datetimepicker();
             });
         </script>
-    </div> 
+    </div>
+                               
+<!-- Div con imagen y texto-->
+<div class='col-sm-6'>                               
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="img-rounded" src="https://www.google.com.mx/search?q=imagenes+1400+x+140+pix&espv=2&biw=1366&bih=667&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjlp5XQkLXNAhUGvxQKHdxeDjgQ_AUIBigB#tbm=isch&q=imagenes+140+x+140+&imgrc=qAxMUK6TjK3HYM%3A" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">Aquí debería de ir algo :)</h4>
+      NO TIENES IDEA DE CUANTO TE ODIO PINSHI PATO GAY :V
+  </div>
+</div>
+</div>
+ </div>                               
                         </form>
                     </div>
                 </div>
@@ -183,6 +235,16 @@
                 $scope.seleccionado = index;
             };
                     }]);
+    </script>
+        <script src="../bower_components/angular/angular.min.js "></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js "></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js "></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
     </script>
 
     </html>
