@@ -44,8 +44,8 @@
          <div class='col-sm-2'>            
                 <p> 
                 
-                <span class="fa fa-calendar"></span>
-                <label for="sel1">Fecha Salida</label>
+                <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
+                <label>Fecha Salida</label>
                 <input type="text" id="datepicker" placeholder="Seleccionar...">
                     
                 </p>                         
@@ -53,6 +53,7 @@
 <!-- Edo Salida -->
  <div class='col-sm-2'>
 <div class="form-group">
+  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
   <label for="sel1">Edo Salida</label>
   <select class="form-control" id="sel1">
     <option>TE ODIO KEV</option>
@@ -63,6 +64,7 @@
 <!-- Edo Llegada -->
  <div class='col-sm-2'>
 <div class="form-group">
+<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>    
   <label for="sel1">Edo Llegada</label>
   <select class="form-control" id="sel1">
     <option>TE ODIO KEV</option>
@@ -73,6 +75,7 @@
 <!-- Aerolinea -->
  <div class='col-sm-2'>
 <div class="form-group">
+<span class="glyphicon glyphicon-plane" aria-hidden="true"></span>    
   <label for="sel1">Aerolinea</label>
   <select class="form-control" id="sel1">
     <option>TE ODIO KEV</option>
@@ -93,15 +96,15 @@
     </div>
                                
 <!-- Div con imagen y texto-->
-<div class='col-sm-6'>                               
+<div class='col-sm-12'>                               
 <div class="media">
   <div class="media-left">
     <a href="#">
-      <img class="img-rounded" src="https://www.google.com.mx/search?q=imagenes+1400+x+140+pix&espv=2&biw=1366&bih=667&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjlp5XQkLXNAhUGvxQKHdxeDjgQ_AUIBigB#tbm=isch&q=imagenes+140+x+140+&imgrc=qAxMUK6TjK3HYM%3A" alt="...">
+      <img class="img-rounded" src="https://inn.org/wp-content/uploads/2015/03/NerdAlertBannerSquare-140x140-140x140.png" alt="Generic placeholder image">
     </a>
   </div>
   <div class="media-body">
-    <h4 class="media-heading">Aquí debería de ir algo :)</h4>
+      <h4 class="media-heading"><b>Aquí debería de ir algo :)</b></h4>
       NO TIENES IDEA DE CUANTO TE ODIO PINSHI PATO GAY :V
   </div>
 </div>
