@@ -209,10 +209,10 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
-                                            <label for="">Modelo:</label>
+                                            <label for="">Aire:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="modelo" id="modalModelo" type="text" class="form-control" ng-model="nuevo.modelo" placeholder="Modelo" required>
+                                                <input name="aire" id="modalModelo" type="text" class="form-control" ng-model="nuevo.aire" placeholder="Aire" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido

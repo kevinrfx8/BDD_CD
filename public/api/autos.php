@@ -53,13 +53,21 @@ switch($method){
         //echo $agencia->{'msg'};
         $id=$connectionA->insert_id;
         
+        $puertas=$aerolinea->{'puertas'};
+        $asientos=$aerolinea->{'asientos'};
+        $cajuela=$aerolinea->{'cajuela'};
+        $transmision=$aerolinea->{'transmision'};
+        $aire=$aerolinea->{'aire'};
+        
+        $query="INSERT INTO autoB (idAuto,puertas,asientos,cajuela,transmision,aire) values('$id','$puertas','$asientos','$cajuela','$transmision','$aire');";
+        $result=$connectionB -> query($query);
+            
         $imagen= $aerolinea->{'imagen'};
         if($imagen!=""){
             $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
             file_put_contents("../img/autos/$id.png", $imagen);
         }
-       //$respuesta=array("ddsf"=>"sd"); 
-        //$respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"logoUrl"=>"","imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$estado,"municipio"=>$municipio,"calle"=>$calle,"numero"=>$numero,"codigopostal"=>$codigopostal,"idEstado"=>$idEstado,"idMunicipio"=>$idMunicipio,"idDireccion"=>$idDireccion);
+        $aerolinea->{'imgUrl'}="img/autos/$id.png?".time();
         $respuesta=$aerolinea;
         echo json_encode($respuesta);
         break;
