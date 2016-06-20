@@ -89,7 +89,7 @@ switch($method){
         $cajuela=$aerolinea->{'cajuela'};
         $transmision=$aerolinea->{'transmision'};
         $aire=$aerolinea->{'aire'};
-        
+         
         $query="UPDATE autoB SET puertas='$puertas' ,asientos='$asientos' ,cajuela='$cajuela' ,transmision='$transmision' ,aire='$aire' WHERE idAuto='$idAuto';";
         $result=$connectionB -> query($query);
         //echo $agencia->{'msg'};

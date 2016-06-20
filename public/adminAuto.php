@@ -85,7 +85,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <td class="vert-align">{{item.precio}}</td>
                                             <td class="vert-align">{{item.modelo}}</td>
                                             <td class="vert-align">{{item.estado}}</td>
-                                            <td class="vert-align">{{item.municipio}}_{{item.aire}}</td>
+                                            <td class="vert-align">{{item.municipio}}</td>
                                             <td class="vert-align">
                                                 <img src="" alt="" ng-src="{{item.imgUrl}}" width="100" height="75">
                                             </td>
@@ -343,7 +343,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         $.toaster({
                             priority: 'success'
                             , title: 'Exito'
-                            , message: 'Hotel Eliminado'
+                            , message: 'Registro eliminado'
                         });
 
 
@@ -352,7 +352,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         $.toaster({
                             priority: 'danger'
                             , title: 'Error'
-                            , message: 'No se pudo eliminar el hotel!'
+                            , message: 'No se pudo eliminar el registro'
                         });
 
 
@@ -373,7 +373,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         $.toaster({
                             priority: 'success'
                             , title: 'Exito'
-                            , message: 'Hotel Modificado'
+                            , message: 'Registro modificado'
                         });
 
 
@@ -384,7 +384,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         $.toaster({
                             priority: 'danger'
                             , title: 'Error'
-                            , message: 'No se pudo modificar el hotel'
+                            , message: 'No se pudo modificar el registro'
                         });
                     });
 
@@ -392,7 +392,12 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             //-------------------------Insertar------------------------------------//
             $scope.insertar = function () {
-                console.log($scope.nuevo);
+                var obj = $.grep($scope.agencias, function (e) {
+                    return e.id == $scope.agencia;
+                });
+                console.log(obj[0]);
+                $scope.nuevo.estado = obj[0].estado;
+                $scope.nuevo.municipio = obj[0].municipio;
                 $scope.nuevo.idAgencia = $scope.agencia;
                 $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
                 $scope.nuevo.imagenNombre = $('input[type=file]').val().split('\\').pop();
@@ -403,14 +408,14 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     $.toaster({
                         priority: 'success'
                         , title: 'Exito'
-                        , message: 'Hotel agregado'
+                        , message: 'Registro insertado'
                     });
                 }, function (response) {
                     console.log(response + "");
                     $.toaster({
                         priority: 'danger'
                         , title: 'Error'
-                        , message: 'No se pudo agregar el hotel'
+                        , message: 'No se pudo insertar el registro'
                     });
                 });
             };
