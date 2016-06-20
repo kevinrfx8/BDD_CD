@@ -1,5 +1,5 @@
 <?PHP            
-    function connect(){
+    function connect2(){
         $servername = "192.168.93.131";
         $username = "root";
         $password = "1234";
@@ -17,7 +17,7 @@
         
     }
 
-    function disconnect($connection){
+    function disconnect2($connection){
         $disconnect = mysqli_close($connection);
     }
 ?>
