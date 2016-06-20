@@ -2,11 +2,11 @@
     session_start();
     
 ?>
-<!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="es" ng-app="app">
 
     <head>
-       <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>VerAutos</title>
@@ -25,7 +25,7 @@
     <![endif]-->
     </head>
 
-   <body ng-controller="controller">
+    <body ng-controller="controller">
         <?php require('templates/header.php');?>
 
 
@@ -35,50 +35,49 @@
                         <div class='col-sm-3'>
                             <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
                             <label>Fecha Salida</label>
-                           <input type="text" id="datepicker"> 
-                            
+                            <input type="text" id="datepicker">
+
                         </div>
                         <div class='col-sm-3'>
                             <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
                             <label>Selección Días</label>
-                            <input type="text" id="dias"> 
-                            
+                            <input type="text" id="dias">
+
                         </div>
                         <div class='col-sm-3'>
-                            
-                        <div class="form-group">
-                            <span class="glyphicon glyphicon-globe"></span>
-                            <label>País</label>
-                            
-                          <select class="form-control" id="sel1">  
-                            <option>1</option>
-                          </select>
-                        </div>
-                            
-                        </div>
-                        
-                        <div class='col-sm-3'>
-                            
-                        <div class="form-group">
-                            <span class="glyphicon glyphicon-globe"></span>
-                            <label>Estado</label>
-                          <select class="form-control" id="sel1">
-                            <option>1</option>
-                          </select>
-                        </div>
-                        </div>
+
+                            <div class="form-group">
+                                <span class="glyphicon glyphicon-globe"></span>
+                                <label>País</label>
+
+                                <select class="form-control" id="sel1">
+                                    <option>1</option>
+                                </select>
                             </div>
+
+                        </div>
+
+                        <div class='col-sm-3'>
+
+                            <div class="form-group">
+                                <span class="glyphicon glyphicon-globe"></span>
+                                <label>Estado</label>
+                                <select class="form-control" id="sel1">
+                                    <option>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="media">
-                  <a class="media-left media-middle" href="#">
-                    <img class="media-object" src="http://www.rawgoodage.com/wp-content/uploads/2011/04/Deadmau5-140x140.jpeg" alt="Generic placeholder image" class="img-circle">
-                  </a>
-                  <div class="media-body">
-                    <h4 class="media-heading">Media heading</h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                  </div>
+                    <a class="media-left media-middle" href="#">
+                        <img class="media-object" src="http://www.rawgoodage.com/wp-content/uploads/2011/04/Deadmau5-140x140.jpeg" alt="Generic placeholder image" class="img-circle">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
                 </div>
-                        
+
 
             </main>
             <?php require('templates/footer.php');?>
@@ -93,6 +92,13 @@
             $("#datepicker").datepicker();
         });
     </script>
-        
-</html>
-    
+    <script src="../bower_components/Toaster/jquery.toaster.js"></script>
+    <script>
+        $.toaster({
+            priority: 'success'
+            , title: 'Title'
+            , message: 'Your message here'
+        });
+    </script>
+
+    </html>

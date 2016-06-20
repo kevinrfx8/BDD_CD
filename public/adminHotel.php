@@ -37,17 +37,17 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
 
             <main>
                 <div class="container">
-                    <h2>Aerolineas</h2>
+                    <h2>Hoteles</h2>
                     <div class="row">
                         <form class="col s12" id="filtros">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <span class="fa fa-plane fa-2x "></span>
+                                    <span class="fa fa-home fa-2x "></span>
                                     <input id="icon_prefix" type="text" class="gcol-md-10" ng-model="filtro" placeholder="Buscar">
                                 </div>
                                 <div class="input-field col-md-2">
 
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregar" ng-click="limpiar()">Nueva Aerolinea</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" ng-click="limpiar()">Nuevo Hotel</button>
                                 </div>
                             </div>
                             <div class=" row ">
@@ -56,28 +56,32 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <tr>
                                             <th data-field="id ">Nombre</th>
                                             <th data-field="name ">Telefono</th>
-                                            <th data-field="price ">SitioWeb</th>
+
+                                            <th data-field="price ">Estado</th>
+                                            <th data-field="price ">Municipio</th>
                                             <th data-field="price ">Imagen</th>
+
                                             <th data-field="price ">Eliminar</th>
                                             <th data-field="price ">Modificar</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <tr ng-repeat="aerolinea in aerolineas|filter:filtro ">
-                                            <td class="vert-align">{{aerolinea.nombre}}</td>
-                                            <td class="vert-align">{{aerolinea.telefono}}</td>
-                                            <td class="vert-align">{{aerolinea.sitioWeb}}</td>
+                                        <tr ng-repeat="item in lista|filter:filtro ">
+                                            <td class="vert-align">{{item.nombre}}</td>
+                                            <td class="vert-align">{{item.telefono}}</td>
+                                            <td class="vert-align">{{item.estado}}</td>
+                                            <td class="vert-align">{{item.municipio}}</td>
                                             <td class="vert-align">
-                                                <img src="" alt="" ng-src="{{aerolinea.imgUrl}}" width="100" height="75">
+                                                <img src="" alt="" ng-src="{{item.imgUrl}}" width="100" height="75">
                                             </td>
                                             <td class="vert-align">
-                                                <a href="" ng-click="eliminar(aerolineas.indexOf(aerolinea))">
+                                                <a href="" ng-click="eliminar(lista.indexOf(item))">
                                                     <span class="fa fa-close fa-3x"></span>
                                                 </a>
                                             </td>
                                             <td class="vert-align">
-                                                <a href="" type="button" class="" data-toggle="modal" data-target="#agregar" ng-click="verAerolinea(aerolinea,aerolineas.indexOf(aerolinea))"><span class="fa fa-edit fa-3x"></span></a>
+                                                <a href="" type="button" class="" data-toggle="modal" data-target="#modal" ng-click="verItem(item,lista.indexOf(item))"><span class="fa fa-edit fa-3x"></span></a>
 
                                             </td>
                                         </tr>
@@ -88,7 +92,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                             <div class="row">
                                 <div class="col-sx-12">
                                     <div class="loader center-block" ng-show="cargando"></div>
-                                    <div class="alert alert-info" ng-show="aerolineas.length==0 && !error && !cargando">
+                                    <div class="alert alert-info" ng-show="lista.length==0 && !error && !cargando">
                                         <strong>Info!</strong> No se encontraron registros.
                                     </div>
                                     <div class="alert alert-warning" ng-show="error">
@@ -101,48 +105,101 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                 </div>
             </main>
             <!-- Modal Alta -->
-            <div id="agregar" class="modal fade" role="dialog">
+            <div id="modal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <!-- modal content -->
                     <div class="modal-content ">
                         <!-- modal header-->
                         <div class="modal-header">
-                            <h2>{{bandNuevo ? 'Aereolinea Nueva ':'Modificar Aerolinea '}}</h2>
+                            <h2>{{bandNuevo ? 'Hotel Nuevo ':'Modificar Hotel '}}</h2>
                         </div>
                         <!-- modal body -->
                         <div class="modal-body">
                             <div class="container-fluid">
 
-                                <form class="" id="formAerolinea" name="formAerolinea">
+                                <form class="" id="form" name="form">
                                     <div class="row">
-                                        <div class="input-group margin-bottom-sm" id="nuevoNombre">
-                                            <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
-                                            <input id="modalNombre" name="nombre" type="text" class="form-control" ng-model="nuevo.nombre" placeholder="Nombre" required>
+                                        <div class="col-xs-6">
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
+                                                <input id="modalNombre" name="nombre" type="text" class="form-control" ng-model="nuevo.nombre" placeholder="Nombre" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
                                         </div>
-                                        <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.nombre.$touched && formAerolinea.nombre.$invalid}">
-                                            <strong>Atención!</strong> Es requerido
+                                        <div class="col-xs-6">
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                                                <input name="telefono" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.telefono" placeholder="Teléfono" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
                                         </div>
-                                        <div class="input-group margin-bottom-sm " id="nuevoNombre">
-                                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                            <input name="telefono" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.telefono" placeholder="Teléfono" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="input-group margin-bottom-sm ">
+
+                                                <select name="estado" class="form-control" id="sel1" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstado" ng-change="actualizarMunicipios()" required>
+
+                                                </select>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.estado.$touched && form.estado.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
                                         </div>
-                                        <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.telefono.$touched && formAerolinea.telefono.$invalid}">
-                                            <strong>Atención!</strong> Es requerido
+                                        <div class="col-xs-6">
+                                            <div class="input-group margin-bottom-sm ">
+                                                <select name="municipio" class="form-control" id="sel1" ng-options="item.id as item.municipio for item in municipios" ng-model="nuevo.idMunicipio" required>
+
+                                                </select>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.municipio.$touched && form.municipio.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
                                         </div>
-                                        <div class="input-group margin-bottom-sm " id="nuevoNombre">
-                                            <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
-                                            <input name="sitio" id="modalSitio" type="text" class="form-control" ng-model="nuevo.sitioWeb" placeholder="Sitio Web" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
+                                                <input id="modalNombre" name="calle" type="text" class="form-control" ng-model="nuevo.calle" placeholder="Calle" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.calle.$touched && form.calle.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
                                         </div>
-                                        <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.sitio.$touched && formAerolinea.sitio.$invalid}">
-                                            <strong>Atención!</strong> Es requerido
+                                        <div class="col-xs-6">
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                                                <input name="numero" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.numero" placeholder="Número" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.numero.$touched && form.numero.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
+                                                <input id="modalNombre" name="codigopostal" type="text" class="form-control" ng-model="nuevo.codigopostal" placeholder="Código Postal" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.codigopostal.$touched && form.codigopostal.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <label class="btn btn-primary btn-file">
                                             <input id="subirArchivo" type="file" fileread="nuevo.imagen" ng-model="nuevo.imagenNombre" name="nuevoNombreImagen" style="display: none;" onchange="$('#upload-file-info').html($(this).val());">
                                             <p>Suba una imagen</p>
                                         </label>
                                         <span id="upload-file-info"></span>
-
                                     </div>
+
 
                                 </form>
 
@@ -151,8 +208,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         <!-- modal footer -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="limpiar()">Cancelar</button>
-                            <button type="button" class="btn btn-primary" ng-click="insertar()" ng-show="bandNuevo" ng-disabled="!formAerolinea.$valid" data-dismiss="modal">Guardar</button>
-                            <button type="button" class="btn btn-primary" ng-click="modificar()" ng-hide="bandNuevo" data-dismiss="modal" ng-disabled="!formAerolinea.$valid">Modificar</button>
+                            <button type="button" class="btn btn-primary" ng-click="insertar()" ng-show="bandNuevo" ng-disabled="!form.$valid" data-dismiss="modal">Guardar</button>
+                            <button type="button" class="btn btn-primary" ng-click="modificar()" ng-hide="bandNuevo" data-dismiss="modal" ng-disabled="!form.$valid">Modificar</button>
 
                         </div>
 
@@ -190,7 +247,21 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
         }]);
         app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
             this.getInfo = function () {
-                return $resource(baseURL + 'aerolineas.php', null, {
+                return $resource(baseURL + 'hoteles.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+            this.getEstados = function () {
+                return $resource(baseURL + 'estados.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+            this.getMunicipios = function () {
+                return $resource(baseURL + 'municipios.php', null, {
                     'update': {
                         method: 'PUT'
                     }
@@ -203,22 +274,40 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             $scope.error = false;
             $scope.seleccionado = "";
             $scope.bandNuevo = false;
+            $scope.estados = [];
+            $scope.municipios = [];
             $scope.nuevo = {
                 id: ""
                 , nombre: ""
                 , telefono: ""
-                , sitioWeb: ""
                 , imagen: ""
                 , imgUrl: ""
-            }
+                , estdo: ""
+                , municipio: ""
+                , calle: ""
+                , numero: ""
+                , codigopostal: ""
+                , idEstado: ""
+                , idMunicipio: ""
+            };
             var controller = this;
             $scope.titulo = true;
-            $scope.aerolineas = [];
+            $scope.lista = [];
             this.service = factory.getInfo();
+            this.serviceEstados = factory.getEstados();
+            this.serviceMunicipios = factory.getMunicipios();
             /*--------------------------------Cargar Registros de inicio-------------------------*/
+            this.serviceEstados.query(
+                function (response) {
+                    $scope.estados = response;
+
+                }
+                , function (response) {});
+
+
             this.service.query(
                 function (response) {
-                    $scope.aerolineas = response;
+                    $scope.lista = response;
                     $scope.cargando = false;
                     //console.log("res" + response);
 
@@ -231,13 +320,13 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             /*-----------------------------Eliminar---------------------------------------------*/
             $scope.eliminar = function (index) {
                 controller.service.delete({
-                        id: $scope.aerolineas[index].id
+                        id: $scope.lista[index].id
                     }, function (response) {
-                        $scope.aerolineas.splice(index, 1);
+                        $scope.lista.splice(index, 1);
                         $.toaster({
                             priority: 'success'
                             , title: 'Exito'
-                            , message: 'Aerolinea Eliminada'
+                            , message: 'Hotel Eliminado'
                         });
 
 
@@ -246,7 +335,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         $.toaster({
                             priority: 'danger'
                             , title: 'Error'
-                            , message: 'No se pudo eliminar la aerolinea!'
+                            , message: 'No se pudo eliminar el hotel!'
                         });
 
 
@@ -260,23 +349,23 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         id: $scope.nuevo.id
                     }, $scope.nuevo, function (response) {
                         console.log(response);
-                        $scope.aerolineas.splice($scope.seleccionado, 1);
-                        $scope.aerolineas.push(response);
+                        $scope.lista.splice($scope.seleccionado, 1);
+                        $scope.lista.push(response);
                         $.toaster({
                             priority: 'success'
                             , title: 'Exito'
-                            , message: 'Aerolinea Modificada'
+                            , message: 'Hotel Modificado'
                         });
 
 
-                        //$scope.aerolineas.splice(index, 1);
+                        //$scope.lista.splice(index, 1);
 
                     }
                     , function (response) {
                         $.toaster({
                             priority: 'danger'
                             , title: 'Error'
-                            , message: 'No se pudo modificar la aerolinea'
+                            , message: 'No se pudo modificar el hotel'
                         });
                     });
 
@@ -289,23 +378,24 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                 console.log($scope.nuevo);
                 controller.service.save($scope.nuevo).$promise.then(function (response) {
                     console.log(response);
-                    $scope.aerolineas.push(response);
+                    $scope.lista.push(response);
                     $.toaster({
                         priority: 'success'
                         , title: 'Exito'
-                        , message: 'Aerolinea agregada'
+                        , message: 'Hotel agregado'
                     });
                 }, function (response) {
                     $.toaster({
                         priority: 'danger'
                         , title: 'Error'
-                        , message: 'No se pudo agregar la aerolinea'
+                        , message: 'No se pudo agregar el hotel'
                     });
                 });
             };
             /*-----------------------------Limpiar-----------------------------------*/
             $scope.limpiar = function () {
-                angular.forEach($scope.formAerolinea, function (input) {
+                $scope.municipios = [];
+                angular.forEach($scope.form, function (input) {
                     if (input && input.hasOwnProperty('$viewValue')) {
                         input.$setUntouched();
                     }
@@ -315,20 +405,44 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     id: ""
                     , nombre: ""
                     , telefono: ""
-                    , sitioWeb: ""
                     , imagen: ""
                     , imgUrl: ""
+                    , estdo: ""
+                    , municipio: ""
+                    , calle: ""
+                    , numero: ""
+                    , codigopostal: ""
+                    , idEstado: ""
+                    , idMunicipio: ""
                 };
                 $("#subirArchivo").val("");
             };
             /*--------------------------------Ver en modal---------------------------*/
-            $scope.verAerolinea = function (aerolinea, index) {
+            $scope.verItem = function (item, index) {
+                //$scope.actualizarMunicipios();
                 $scope.bandNuevo = false;
-                $scope.nuevo = angular.copy(aerolinea);
+                $scope.nuevo = angular.copy(item);
                 $scope.nuevo.imagen = "";
                 $scope.seleccionado = index;
+                $scope.actualizarMunicipios();
             };
-                    }]);
+            $scope.actualizarMunicipios = function () {
+                controller.serviceMunicipios.query({
+                        id: $scope.nuevo.idEstado
+                    }
+                    , function (response) {
+                        console.log(response);
+                        $scope.municipios = response;
+                        //if ($scope.seleccionado != undefined)
+                        console.log($scope.seleccionado);
+                        if ($scope.seleccionado != "")
+                            $scope.nuevo.idMunicipio = $scope.lista[$scope.seleccionado].idMunicipio;
+
+
+                    }
+                    , function (response) {});
+            };
+        }]);
     </script>
 
     </html>
