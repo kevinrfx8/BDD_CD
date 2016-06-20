@@ -120,6 +120,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <form class="" id="form" name="form">
                                     <div class="row">
                                         <div class="col-xs-6">
+                                            <label for="">Nombre:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
                                                 <input id="modalNombre" name="nombre" type="text" class="form-control" ng-model="nuevo.nombre" placeholder="Nombre" required>
@@ -129,6 +130,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
+                                            <label for="">Teléfono:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                                                 <input name="telefono" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.telefono" placeholder="Teléfono" required>
@@ -140,8 +142,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <div class="input-group margin-bottom-sm ">
-
+                                            <div class="input-group input-group-lg">
+                                                <label for="">Estado:</label>
                                                 <select name="estado" class="form-control" id="selectEstado" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstado" ng-change="actualizarMunicipios()" required>
 
                                                 </select>
@@ -151,8 +153,9 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
-                                            <div class="input-group margin-bottom-sm ">
-                                                <select name="municipio" class="form-control" id="selectMunicipio" ng-options="item.id as item.municipio for item in municipios" ng-model="nuevo.idMunicipio" required>
+                                            <label for="">Municipio:</label>
+                                            <div class="input-group input-group-lg ">
+                                                <select name="municipio" class="form-control col-xs-6" id="selectMunicipio" ng-options="item.id as item.municipio for item in municipios" ng-model="nuevo.idMunicipio" required>
 
                                                 </select>
                                             </div>
@@ -163,15 +166,17 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-6">
+                                            <label for="">Calle:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
-                                                <input id="modalNombre" name="calle" type="text" class="form-control" ng-model="nuevo.calle" placeholder="Calle" required>
+                                                <input id="modalNombre" name="calle" type="text" class="form-control " ng-model="nuevo.calle" placeholder="Calle" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.calle.$touched && form.calle.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
+                                            <label for="">Número:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                                                 <input name="numero" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.numero" placeholder="Número" required>
@@ -183,6 +188,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-6">
+                                            <label for="">Código Postal:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
                                                 <input id="modalNombre" name="codigopostal" type="text" class="form-control" ng-model="nuevo.codigopostal" placeholder="Código Postal" required>
@@ -420,10 +426,12 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     , idMunicipio: ""
                 };
                 $("#subirArchivo").val("");
+                $("#upload-file-info").text("");
             };
             /*--------------------------------Ver en modal---------------------------*/
             $scope.verItem = function (item, index) {
                 //$scope.actualizarMunicipios();
+
                 $scope.bandNuevo = false;
                 $scope.nuevo = angular.copy(item);
                 $scope.nuevo.imagen = "";
@@ -431,6 +439,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                 $scope.actualizarMunicipios();
             };
             $scope.actualizarMunicipios = function () {
+                $("#subirArchivo").val("");
+                $("#upload-file-info").text("");
                 controller.serviceMunicipios.query({
                         id: $scope.nuevo.idEstado
                     }
