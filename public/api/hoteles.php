@@ -24,7 +24,7 @@ switch($method){
             $result=$connectionA -> query($query);
             $respuesta=array();
             while($row=$result->fetch_array(MYSQLI_ASSOC)){
-               $id=$row['idHotel']; $fila=array("id"=>$row['idHotel'],"nombre"=>$row['nombre'],"telefono"=>$row['telefono'],"logoUrl"=>$row['logoUrl'],"imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$row['estado'],"municipio"=>$row['municipio'],"calle"=>$row['calle'],"numero"=>$row['numero'],"codigopostal"=>$row['codigoPostal'],"idEstado"=>$row['idEstado'],"idMunicipio"=>$row['idMunicipio']);
+               $id=$row['idHotel']; $fila=array("id"=>$row['idHotel'],"nombre"=>$row['nombre'],"telefono"=>$row['telefono'],"logoUrl"=>$row['logoUrl'],"imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$row['estado'],"municipio"=>$row['municipio'],"calle"=>$row['calle'],"numero"=>$row['numero'],"codigopostal"=>$row['codigoPostal'],"idEstado"=>$row['idEstado'],"idMunicipio"=>$row['idMunicipio'],"idDireccion"=>$row['idDireccion']);
                 //$fila=array("id"=>$row['idHotel']);
                 array_push($respuesta,$fila);
             }
@@ -33,48 +33,65 @@ switch($method){
         break;
     case "POST":
         $aerolinea=json_decode(file_get_contents('php://input'));
+        
+        $idEstado=$aerolinea->{'idEstado'};
+        $estado=$aerolinea->{'estado'};
+        $municipio=$aerolinea->{'municipio'};
+        $idMunicipio=$aerolinea->{'idMunicipio'};
+        $calle=$aerolinea->{'calle'};
+        $numero=$aerolinea->{'numero'};
+        $codigopostal=$aerolinea->{'codigopostal'};
+        $query="INSERT INTO direccion (calle,numero,codigoPostal,idMunicipio) VALUES ('$calle','$numero','$codigopostal','$idMunicipio')";
+        $result=$connectionA -> query($query);
+        
+        $idDireccion=$connectionA->insert_id;
+        
         $nombre=$aerolinea->{'nombre'};
         $telefono=$aerolinea->{'telefono'};
-        $sitioWeb=$aerolinea->{'sitioWeb'};
-        $query="INSERT INTO aerolinea (nombre,telefono,sitioWeb,logoUrl) values('$nombre','$telefono','$sitioWeb','image.png')";
+        $query="INSERT INTO hotel (nombre,telefono,logoUrl,idDireccion) values('$nombre','$telefono','image.png','$idDireccion')";
         $result=$connectionA -> query($query);
         //echo $agencia->{'msg'};
         $id=$connectionA->insert_id;
+        
         $imagen= $aerolinea->{'imagen'};
         if($imagen!=""){
             $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
-            file_put_contents("../img/aerolineas/$id.png", $imagen);
+            file_put_contents("../img/hoteles/$id.png", $imagen);
         }
-        /*list($type, $data) = explode(';', $data);
-        list(, $data)      = explode(',', $data);
-        $data = base64_decode($data);*/
-
-        //file_put_contents('/tmp/image.png', $data);
-        
-        
-        //echo file_get_contents('php://input');
-        $respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"sitioWeb"=>$sitioWeb,"logoUrl"=>"","imgUrl"=>"img/aerolineas/$id.png?".time());
+       //$respuesta=array("ddsf"=>"sd"); 
+        $respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"logoUrl"=>"","imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$estado,"municipio"=>$municipio,"calle"=>$calle,"numero"=>$numero,"codigopostal"=>$codigopostal,"idEstado"=>$idEstado,"idMunicipio"=>$idMunicipio,"idDireccion"=>$idDireccion);
         echo json_encode($respuesta);
         break;
     case "PUT"://modificar
-        $id=$_GET['id'];
         $aerolinea=json_decode(file_get_contents('php://input'));
+        
+        $idEstado=$aerolinea->{'idEstado'};
+        $estado=$aerolinea->{'estado'};
+        $municipio=$aerolinea->{'municipio'};
+        $idMunicipio=$aerolinea->{'idMunicipio'};
+        $calle=$aerolinea->{'calle'};
+        $numero=$aerolinea->{'numero'};
+        $codigopostal=$aerolinea->{'codigopostal'};
+        $idDireccion=$aerolinea->{'idDireccion'};
+        $query="UPDATE direccion SET calle='$calle',numero='$numero',codigoPostal='$codigopostal',idMunicipio='$idMunicipio' WHERE idDireccion=$idDireccion";
+        $result=$connectionA -> query($query);
+        $id=$aerolinea->{'id'};
+        
         $nombre=$aerolinea->{'nombre'};
         $telefono=$aerolinea->{'telefono'};
-        $sitioWeb=$aerolinea->{'sitioWeb'};
-        $query="UPDATE hotel SET nombre='$nombre',telefono='$telefono',sitioWeb='$sitioWeb' where idAerolinea=$id";
+        $query="UPDATE hotel SET nombre='$nombre',telefono='$telefono',logoUrl='image.png',idDireccion='$idDireccion' WHERE idHotel='$id'";
         $result=$connectionA -> query($query);
         //echo $agencia->{'msg'};
         
         $imagen= $aerolinea->{'imagen'};
         if($imagen!=""){
-            if (file_exists("../img/aerolineas/$id.png")) {
-                unlink("../img/aerolineas/$id.png");
+            if (file_exists("../img/hoteles/$id.png")) {
+                unlink("../img/hoteles/$id.png");
             }
             $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
-            file_put_contents("../img/aerolineas/$id.png", $imagen);
+            file_put_contents("../img/hoteles/$id.png", $imagen);
         }
-        $respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"sitioWeb"=>$sitioWeb,"logoUrl"=>"","imgUrl"=>"img/aerolineas/$id.png?".time());
+        $respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"logoUrl"=>"","imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$estado,"municipio"=>$municipio,"calle"=>$calle,"numero"=>$numero,"codigopostal"=>$codigopostal,"idEstado"=>$idEstado,"idMunicipio"=>$idMunicipio,"idDireccion"=>$idDireccion);
         echo json_encode($respuesta);
         break;
     case "DELETE"://eliminar

@@ -142,7 +142,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-6">
                                             <div class="input-group margin-bottom-sm ">
 
-                                                <select name="estado" class="form-control" id="sel1" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstado" ng-change="actualizarMunicipios()" required>
+                                                <select name="estado" class="form-control" id="selectEstado" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstado" ng-change="actualizarMunicipios()" required>
 
                                                 </select>
                                             </div>
@@ -152,7 +152,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="input-group margin-bottom-sm ">
-                                                <select name="municipio" class="form-control" id="sel1" ng-options="item.id as item.municipio for item in municipios" ng-model="nuevo.idMunicipio" required>
+                                                <select name="municipio" class="form-control" id="selectMunicipio" ng-options="item.id as item.municipio for item in municipios" ng-model="nuevo.idMunicipio" required>
 
                                                 </select>
                                             </div>
@@ -344,6 +344,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             /*------------------------------------Modificar------------------------------------*/
             $scope.modificar = function (index) {
+                $scope.nuevo.estado = $('#selectEstado option:selected').text();
+                $scope.nuevo.municipio = $('#selectMunicipio option:selected').text();
                 console.log($scope.nuevo);
                 controller.service.update({
                         id: $scope.nuevo.id
@@ -373,11 +375,12 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             //-------------------------Insertar------------------------------------//
             $scope.insertar = function () {
-
+                $scope.nuevo.estado = $('#selectEstado option:selected').text();
+                $scope.nuevo.municipio = $('#selectMunicipio option:selected').text();
                 $scope.nuevo.imagenNombre = $('input[type=file]').val().split('\\').pop();
                 console.log($scope.nuevo);
                 controller.service.save($scope.nuevo).$promise.then(function (response) {
-                    console.log(response);
+                    //console.log(response);
                     $scope.lista.push(response);
                     $.toaster({
                         priority: 'success'
@@ -385,6 +388,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         , message: 'Hotel agregado'
                     });
                 }, function (response) {
+                    console.log(response + "");
                     $.toaster({
                         priority: 'danger'
                         , title: 'Error'
@@ -431,7 +435,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         id: $scope.nuevo.idEstado
                     }
                     , function (response) {
-                        console.log(response);
+                        // console.log(response);
                         $scope.municipios = response;
                         //if ($scope.seleccionado != undefined)
                         console.log($scope.seleccionado);
