@@ -68,39 +68,44 @@ switch($method){
             file_put_contents("../img/autos/$id.png", $imagen);
         }
         $aerolinea->{'imgUrl'}="img/autos/$id.png?".time();
+        $aerolinea->{'idAuto'}=$id;
         $respuesta=$aerolinea;
         echo json_encode($respuesta);
         break;
     case "PUT"://modificar
         $aerolinea=json_decode(file_get_contents('php://input'));
         
-        $idEstado=$aerolinea->{'idEstado'};
-        $estado=$aerolinea->{'estado'};
-        $municipio=$aerolinea->{'municipio'};
-        $idMunicipio=$aerolinea->{'idMunicipio'};
-        $calle=$aerolinea->{'calle'};
-        $numero=$aerolinea->{'numero'};
-        $codigopostal=$aerolinea->{'codigopostal'};
-        $idDireccion=$aerolinea->{'idDireccion'};
-        $query="UPDATE direccion SET calle='$calle',numero='$numero',codigoPostal='$codigopostal',idMunicipio='$idMunicipio' WHERE idDireccion=$idDireccion";
-        $result=$connectionA -> query($query);
-        $id=$aerolinea->{'id'};
+        $precio=$aerolinea->{'precio'};
+        $modelo=$aerolinea->{'modelo'};
+        $idTipo=$aerolinea->{'idTipoAuto'};
+        $idAuto=$aerolinea->{'idAuto'};
+        //$idDireccion=$connectionA->insert_id;
         
-        $nombre=$aerolinea->{'nombre'};
-        $telefono=$aerolinea->{'telefono'};
-        $query="UPDATE hotel SET nombre='$nombre',telefono='$telefono',logoUrl='image.png',idDireccion='$idDireccion' WHERE idHotel='$id'";
+        $query="UPDATE autoA SET precio='$precio', modelo='$modelo', imgUrl='image.png', idTipoAuto='$idTipo' WHERE idAuto='$idAuto';";
         $result=$connectionA -> query($query);
+        
+        $puertas=$aerolinea->{'puertas'};
+        $asientos=$aerolinea->{'asientos'};
+        $cajuela=$aerolinea->{'cajuela'};
+        $transmision=$aerolinea->{'transmision'};
+        $aire=$aerolinea->{'aire'};
+        
+        $query="UPDATE autoB SET puertas='$puertas' ,asientos='$asientos' ,cajuela='$cajuela' ,transmision='$transmision' ,aire='$aire' WHERE idAuto='$idAuto';";
+        $result=$connectionB -> query($query);
         //echo $agencia->{'msg'};
         
         $imagen= $aerolinea->{'imagen'};
         if($imagen!=""){
-            if (file_exists("../img/hoteles/$id.png")) {
-                unlink("../img/hoteles/$id.png");
+            if (file_exists("../img/autos/$idAuto.png")) {
+                unlink("../img/autos/$idAuto.png");
             }
             $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
-            file_put_contents("../img/hoteles/$id.png", $imagen);
+            file_put_contents("../img/autos/$idAuto.png", $imagen);
         }
-        $respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"logoUrl"=>"","imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$estado,"municipio"=>$municipio,"calle"=>$calle,"numero"=>$numero,"codigopostal"=>$codigopostal,"idEstado"=>$idEstado,"idMunicipio"=>$idMunicipio,"idDireccion"=>$idDireccion);
+        //$respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"logoUrl"=>"","imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$estado,"municipio"=>$municipio,"calle"=>$calle,"numero"=>$numero,"codigopostal"=>$codigopostal,"idEstado"=>$idEstado,"idMunicipio"=>$idMunicipio,"idDireccion"=>$idDireccion);
+        $aerolinea->{'imgUrl'}="img/autos/$idAuto.png?".time();
+        
+        $respuesta=$aerolinea;
         echo json_encode($respuesta);
         break;
     case "DELETE"://eliminar

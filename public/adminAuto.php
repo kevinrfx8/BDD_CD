@@ -302,7 +302,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             $scope.seleccionado = "";
             $scope.bandNuevo = false;
             $scope.agencias = [];
-            $scope.nuevo = {
+            /*$scope.nuevo = {
                 id: ""
                 , nombre: ""
                 , telefono: ""
@@ -315,7 +315,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                 , codigopostal: ""
                 , idEstado: ""
                 , idMunicipio: ""
-            };
+            };*/
             var controller = this;
             $scope.titulo = true;
             $scope.lista = [];
@@ -337,7 +337,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             /*-----------------------------Eliminar---------------------------------------------*/
             $scope.eliminar = function (index) {
                 controller.service.delete({
-                        id: $scope.lista[index].id
+                        id: $scope.lista[index].idAuto
                     }, function (response) {
                         $scope.lista.splice(index, 1);
                         $.toaster({
@@ -361,10 +361,11 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             /*------------------------------------Modificar------------------------------------*/
             $scope.modificar = function (index) {
-                $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
                 console.log($scope.nuevo);
+                $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
+
                 controller.service.update({
-                        id: $scope.nuevo.id
+                        id: $scope.nuevo.idAuto
                     }, $scope.nuevo, function (response) {
                         console.log(response);
                         $scope.lista.splice($scope.seleccionado, 1);
@@ -391,8 +392,9 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             //-------------------------Insertar------------------------------------//
             $scope.insertar = function () {
+                console.log($scope.nuevo);
                 $scope.nuevo.idAgencia = $scope.agencia;
-                $scope.nuevo.selectTipo = $('#selectTipo option:selected').text();
+                $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
                 $scope.nuevo.imagenNombre = $('input[type=file]').val().split('\\').pop();
                 console.log($scope.nuevo);
                 controller.service.save($scope.nuevo).$promise.then(function (response) {
@@ -423,7 +425,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     }
                 });
                 $scope.bandNuevo = true;
-                $scope.nuevo = {
+                /*$scope.nuevo = {
                     id: ""
                     , nombre: ""
                     , telefono: ""
@@ -436,7 +438,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     , codigopostal: ""
                     , idEstado: ""
                     , idMunicipio: ""
-                };
+                };*/
                 $("#subirArchivo").val("");
                 $("#upload-file-info").text("");
             };
@@ -448,25 +450,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                 $scope.nuevo = angular.copy(item);
                 $scope.nuevo.imagen = "";
                 $scope.seleccionado = index;
-                $scope.actualizarMunicipios();
-            };
-            $scope.actualizarMunicipios = function () {
-                $("#subirArchivo").val("");
-                $("#upload-file-info").text("");
-                controller.serviceMunicipios.query({
-                        id: $scope.nuevo.idEstado
-                    }
-                    , function (response) {
-                        // console.log(response);
-                        $scope.municipios = response;
-                        //if ($scope.seleccionado != undefined)
-                        console.log($scope.seleccionado);
-                        if ($scope.seleccionado != "")
-                            $scope.nuevo.idMunicipio = $scope.lista[$scope.seleccionado].idMunicipio;
 
-
-                    }
-                    , function (response) {});
             };
             $scope.getAutos = function () {
                 controller.service.query({
