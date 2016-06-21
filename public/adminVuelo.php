@@ -23,6 +23,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
         <link rel="stylesheet" href="../bower_components/bootstrap/less/bootstrap.css">
         <link rel="stylesheet" href="assets/css/style.css">
 
+        <link rel="stylesheet" href="../bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css">
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -43,8 +45,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="input-group-lg">
-                                        <label for="">Agencias:</label>
-                                        <select name="agencias" class="form-control" id="selectAgencia" ng-options="item.id as item.nombre for item in agencias" ng-model="agencia" ng-change="getAutos()" required>
+                                        <label for="">Aerolineas:</label>
+                                        <select name="aerolineas" class="form-control" id="selectAerolinea" ng-options="item.id as item.nombre for item in aerolineas" ng-model="aerolinea" ng-change="getVuelos()" required>
                                         </select>
                                     </div>
                                 </div>
@@ -66,14 +68,13 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th data-field="id ">Tipo</th>
-                                            <th data-field="name ">Precio</th>
-                                            <th data-field="name ">Modelo</th>
-
-                                            <th data-field="price ">Estado</th>
-                                            <th data-field="price ">Municipio</th>
+                                            <th data-field="id ">Fecha Salida</th>
+                                            <th data-field="name ">Fecha Llegada</th>
+                                            <th data-field="price ">Hora Salida</th>
+                                            <th data-field="price ">Hora Llegada</th>
+                                            <th data-field="name ">Estado Origen</th>
+                                            <th data-field="price ">Estado Destino</th>
                                             <th data-field="price ">Imagen</th>
-
                                             <th data-field="price ">Eliminar</th>
                                             <th data-field="price ">Modificar</th>
                                         </tr>
@@ -81,11 +82,12 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
 
                                     <tbody>
                                         <tr ng-repeat="item in lista|filter:filtro ">
-                                            <td class="vert-align">{{item.descripcion}}</td>
-                                            <td class="vert-align">{{item.precio}}</td>
-                                            <td class="vert-align">{{item.modelo}}</td>
-                                            <td class="vert-align">{{item.estado}}</td>
-                                            <td class="vert-align">{{item.municipio}}</td>
+                                            <td class="vert-align">{{item.fechaSalida}}</td>
+                                            <td class="vert-align">{{item.fechaLlegada}}</td>
+                                            <td class="vert-align">{{item.horaSalida}}</td>
+                                            <td class="vert-align">{{item.horaLlegada}}</td>
+                                            <td class="vert-align">{{item.estadoOrigen}}</td>
+                                            <td class="vert-align">{{item.estadoDestino}}</td>
                                             <td class="vert-align">
                                                 <img src="" alt="" ng-src="{{item.imgUrl}}" width="100" height="75">
                                             </td>
@@ -133,64 +135,65 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
 
                                 <form class="" id="form" name="form">
                                     <div class="row">
-                                        <div class="col-xs-4">
-                                            <label for="">Precio:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="modalPrecio" name="precio" type="text" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
-                                            </div>
+                                        <div class="col-xs-6">
+                                            <label for="">Fecha Salida:</label>
+                                            <i class="fa fa-home fa-fw"></i>
+                                            <input name="fechaSalida" type="text" id="datepicker" class="form-control" ng-model="nuevo.fechaSalida" placeholder="Fecha Salida">
+
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
                                         </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Modelo:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="modelo" id="modalModelo" type="text" class="form-control" ng-model="nuevo.modelo" placeholder="Modelo" required>
-                                            </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Puertas:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="puertas" id="modalPuertas" type="text" class="form-control" ng-model="nuevo.puertas" placeholder="Puertas" required>
-                                            </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
+                                        <div class="col-xs-6">
+                                            <label for="">Fecha Llegada:</label>
+                                            <i class="fa fa-home fa-fw"></i>
+                                            <input name="fechaLlegada" type="text" id="datepicker2" class="form-control" ng-model="nuevo.fechaLlegada" placeholder="Fecha Llegada">
+
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-4">
-                                            <label for="">Tipo Auto:</label>
+                                        <div class="col-xs-6">
+                                            <label for="">Estado Origen:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <select name="tipo" class="form-control" id="selectTipo" ng-options="item.idTipoAuto as item.descripcion for item in tipos" ng-model="nuevo.idTipoAuto" required>
+                                                <select name="estadoOrigen" class="form-control" id="selectOrigen" ng-options="item.idEstado as item.estado for item in estados" ng-model="nuevo.idEstadoOrigen">
                                                 </select>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
                                         </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Asientos:</label>
+                                        <div class="col-xs-6">
+                                            <label for="">Estado Destino:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="asiento" id="modalAsiento" type="text" class="form-control" ng-model="nuevo.asientos" placeholder="Asientos" required>
+                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
+                                                <select name="estadoDestino" class="form-control" id="selectDestino" ng-options="item.idEstado as item.estado for item in estados" ng-model="nuevo.idEstadoDestino">
+                                                </select>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
                                         </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Cajuela:</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label for="">Hora Salida:</label>
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
+                                                <input name="horaSalida" type="text" class="form-control" ng-model="nuevo.horaSalida" placeholder="Hora Salida" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label for="">Hora Llegada:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="cajuela" id="modalCajuela" type="text" class="form-control" ng-model="nuevo.cajuela" placeholder="Cajuela" required>
+                                                <input name="horaLlegada" type="text" class="form-control" ng-model="nuevo.horaLlegada" placeholder="Hora Llegada" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -199,20 +202,62 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-4">
-                                            <label for="">Transmisión:</label>
+                                            <label for="">Asientos Primera Clase:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="modalTransmision" name="transmision" type="text" class="form-control" ng-model="nuevo.transmision" placeholder="Transmisión" required>
+                                                <input name="disponiblesPrimera" type="text" class="form-control" ng-model="nuevo.disponiblesPrimera" placeholder="Asientos Primera Clase" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
-                                            <label for="">Aire:</label>
+                                            <label for="">Asientos Clase Ejecutiva:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="aire" id="modalModelo" type="text" class="form-control" ng-model="nuevo.aire" placeholder="Aire" required>
+                                                <input name="disponiblesEjecutiva" type="text" class="form-control" ng-model="nuevo.disponiblesEjecutiva" placeholder="Asientos Clase Ejecutiva" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="">Asientos Clase Turista:</label>
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                                                <input name="disponiblesTurista" type="text" class="form-control" ng-model="nuevo.disponiblesTurista" placeholder="Asientos Clase Turista" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <label for="">Costo Primera Clase:</label>
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
+                                                <input name="costoPrimera" type="text" class="form-control" ng-model="nuevo.costoPrimera" placeholder="Costos Primera Clase" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="">Costo Clase Ejecutiva:</label>
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                                                <input name="costoEjecutiva" type="text" class="form-control" ng-model="nuevo.costoEjecutiva" placeholder="Costo Clase Ejecutiva" required>
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
+                                                <strong>Atención!</strong> Es requerido
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="">Costo Clase Turista:</label>
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                                                <input name="costoTurista" type="text" class="form-control" ng-model="nuevo.costoTurista" placeholder="Costo Clase Turista" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -250,6 +295,14 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
     <script src="../bower_components/jquery/dist/jquery.min.js "></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/Toaster/jquery.toaster.js"></script>
+
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+            $("#datepicker2").datepicker();
+        });
+    </script>
     <script>
         var app = angular.module('app', ['ngResource']);
         //app.constant('baseURL', 'http://localhost:3000/');
@@ -302,37 +355,23 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             $scope.seleccionado = "";
             $scope.bandNuevo = false;
             $scope.agencias = [];
-            /*$scope.nuevo = {
-                id: ""
-                , nombre: ""
-                , telefono: ""
-                , imagen: ""
-                , imgUrl: ""
-                , estdo: ""
-                , municipio: ""
-                , calle: ""
-                , numero: ""
-                , codigopostal: ""
-                , idEstado: ""
-                , idMunicipio: ""
-            };*/
             $scope.nuevo = {};
             var controller = this;
             $scope.titulo = true;
             $scope.lista = [];
             this.service = factory.getInfo(); //get autos
-            this.serviceAgencias = factory.getAgencias();
-            this.serviceTipo = factory.getTipo();
+            this.serviceAerolineas = factory.getAerolineas();
+            this.serviceEstados = factory.getEstados();
 
             /*--------------------------------Cargar Registros de inicio-------------------------*/
-            this.serviceAgencias.query(
+            this.serviceAerolineas.query(
                 function (response) {
-                    $scope.agencias = response;
+                    $scope.aerolineas = response;
 
                 }
                 , function (response) {});
-            this.serviceTipo.query(function (response) {
-                $scope.tipos = response;
+            this.serviceEstados.query(function (response) {
+                $scope.estados = response;
             });
 
             /*-----------------------------Eliminar---------------------------------------------*/
@@ -431,6 +470,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     }
                 });
                 $scope.bandNuevo = true;
+                $scope.nuevo = {};
                 /*$scope.nuevo = {
                     id: ""
                     , nombre: ""
@@ -458,9 +498,9 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                 $scope.seleccionado = index;
 
             };
-            $scope.getAutos = function () {
+            $scope.getVuelos = function () {
                 controller.service.query({
-                        id: $scope.agencia
+                        id: $scope.aerolinea
                     }
                     , function (response) {
                         $scope.lista = response;

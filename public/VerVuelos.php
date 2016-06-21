@@ -39,81 +39,80 @@
                     <h2>Ver Vuelos</h2>
                     <div class="row">
                         <form class="col s12" id="filtros">
-                           <div class="row">
-        <!-- fecha salida -->
-         <div class='col-sm-2'>            
-                <p> 
-                
-                <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
-                <label>Fecha Salida</label>
-                <input type="text" id="datepicker" placeholder="Seleccionar...">
-                    
-                </p>                         
-        </div>
-<!-- Edo Salida -->
- <div class='col-sm-2'>
-<div class="form-group">
-  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-  <label for="sel1">Edo Salida</label>
-  <select class="form-control" id="sel1">
-    <option>TE ODIO KEV</option>
-  </select>
-</div>         
- </div>
-                               
-<!-- Edo Llegada -->
- <div class='col-sm-2'>
-<div class="form-group">
-<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>    
-  <label for="sel1">Edo Llegada</label>
-  <select class="form-control" id="sel1">
-    <option>TE ODIO KEV</option>
-  </select>
-</div>         
- </div>
+                            <div class="row">
+                                <!-- fecha salida -->
+                                <div class='col-sm-2'>
+                                    <p>
 
-<!-- Aerolinea -->
- <div class='col-sm-2'>
-<div class="form-group">
-<span class="glyphicon glyphicon-plane" aria-hidden="true"></span>    
-  <label for="sel1">Aerolinea</label>
-  <select class="form-control" id="sel1">
-    <option>TE ODIO KEV</option>
-  </select>
-</div>         
- </div>
-                               
-<!--Boton Buscar -->
-<div class='col-sm-2'>                               
-<div class="btn-group" role="group" aria-label="...">
-  <button type="button" class="btn btn-default">Buscar</button>
-</div>                               
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-    </div>
-                               
-<!-- Div con imagen y texto-->
-<div class='col-sm-12'>                               
-<div class="media">
-  <div class="media-left">
-    <a href="#">
-      <img class="img-rounded" src="https://inn.org/wp-content/uploads/2015/03/NerdAlertBannerSquare-140x140-140x140.png" alt="Generic placeholder image">
-    </a>
-  </div>
-  <div class="media-body">
-      <h4 class="media-heading"><b>Aquí debería de ir algo :)</b></h4>
-      NO TIENES IDEA DE CUANTO TE ODIO PINSHI PATO GAY :V
-  </div>
-</div>
-</div>
- </div>                               
+                                        <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
+                                        <label>Fecha Salida</label>
+                                        <input type="text" id="datepicker" placeholder="Seleccionar...">
+
+                                    </p>
+                                </div>
+                                <!-- Edo Salida -->
+                                <div class='col-sm-2'>
+                                    <div class="form-group">
+                                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                                        <label for="sel1">Edo Salida</label>
+                                        <select class="form-control" id="sel1">
+                                            <option>TE ODIO KEV</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Edo Llegada -->
+                                <div class='col-sm-2'>
+                                    <div class="form-group">
+                                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                                        <label for="sel1">Edo Llegada</label>
+                                        <select class="form-control" id="sel1">
+                                            <option>TE ODIO KEV</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Aerolinea -->
+                                <div class='col-sm-2'>
+                                    <div class="form-group">
+                                        <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+                                        <label for="sel1">Aerolinea</label>
+                                        <select class="form-control" id="sel1">
+                                            <option>TE ODIO KEV</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--Boton Buscar -->
+                                <div class='col-sm-2'>
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-default">Buscar</button>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker1').datetimepicker();
+                                        });
+                                    </script>
+                                </div>
+
+                                <!-- Div con imagen y texto-->
+                                <div class='col-sm-12'>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="img-rounded" src="https://inn.org/wp-content/uploads/2015/03/NerdAlertBannerSquare-140x140-140x140.png" alt="Generic placeholder image">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><b>Aquí debería de ir algo :)</b></h4> NO TIENES IDEA DE CUANTO TE ODIO PINSHI PATO GAY :V
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
-            </main>          
+            </main>
             <?php require('templates/footer.php');?>
     </body>
     <script src="../bower_components/angular/angular.min.js "></script>
@@ -239,7 +238,7 @@
             };
                     }]);
     </script>
-        <script src="../bower_components/angular/angular.min.js "></script>
+    <script src="../bower_components/angular/angular.min.js "></script>
     <script src="../bower_components/angular-resource/angular-resource.min.js "></script>
     <script src="../bower_components/jquery/dist/jquery.min.js "></script>
     <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
