@@ -41,17 +41,21 @@ switch($method){
     case "POST":
         $request=json_decode(file_get_contents('php://input'));
         
+        
         $fechaSalida=$request->{'fechaSalida'};
         $fechaLlegada=$request->{'fechaLlegada'};
         $idEstadoOrigen=$request->{'idEstadoOrigen'};
-        $idEstadoDesteino=$request->{'idEstadoDestino'};
+        $idEstadoDestino=$request->{'idEstadoDestino'};
         $idAerolinea=$request->{'idAerolinea'};
         $horaSalida=$request->{'horaSalida'};
         $horaLlegada=$request->{'horaLlegada'};
         
-        $query="INSERT INTO vueloA (fechaSalida,fechaLlegada,idEstadoOrigen,idEstadoDestino,idAerolinea,horaSalida,horaLlegada) values('$fechaSalida','$fechaLlegada','$idEstadoOrigen','$idEstadoDestino','$idAerolinea','$horaSalida','$horaLlegada')";
+        $query="INSERT INTO vueloA (fechaSalida,fechaLlegada,idEstadoOrigen,idEstadoDestino,idAerolinea,horaSalida,horaLlegada) values(STR_TO_DATE('$fechaSalida', '%m/%d/%Y'),STR_TO_DATE('$fechaLlegada', '%m/%d/%Y'),'$idEstadoOrigen','$idEstadoDestino','$idAerolinea','$horaSalida','$horaLlegada')";
+        
         $result=$connectionA -> query($query);
         $id=$connectionA->insert_id;
+        
+        
         
         $disponiblesPrimera=$request->{'disponiblesPrimera'};
         $disponiblesEjecutiva=$request->{'disponiblesEjecutiva'};
@@ -64,50 +68,64 @@ switch($method){
         $query="INSERT INTO vueloB values('$id','$disponiblesPrimera','$disponiblesEjecutiva','$disponiblesTurista','$cuotaPrimera','$cuotaEjecutiva','$cuotaTurista');";
         $result=$connectionB -> query($query);
             
-        $imagen= $aerolinea->{'imagen'};
-        if($imagen!=""){
-            $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
-            file_put_contents("../img/vuelos/$id.png", $imagen);
+        
+        
+        if(isset($request->{'imagen'})){
+            $imagen= $request->{'imagen'};
+            if($imagen!=""){
+                $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
+                file_put_contents("../img/vuelos/$id.png", $imagen);
+            }
         }
-        $aerolinea->{'imgUrl'}="img/vuelos/$id.png?".time();
-        $aerolinea->{'idVuelo'}=$id;
-        $respuesta=$aerolinea;
-        echo json_encode($respuesta);
+        
+        $request->{'imgUrl'}="img/vuelos/$id.png?".time();
+        $request->{'idVuelo'}=$id;
+        echo json_encode($request);
         break;
     case "PUT"://modificar
-        $aerolinea=json_decode(file_get_contents('php://input'));
+        $request=json_decode(file_get_contents('php://input'));
         
-        $precio=$aerolinea->{'precio'};
-        $modelo=$aerolinea->{'modelo'};
-        $idTipo=$aerolinea->{'idTipoAuto'};
-        $idAuto=$aerolinea->{'idAuto'};
-        //$idDireccion=$connectionA->insert_id;
         
-        $query="UPDATE autoA SET precio='$precio', modelo='$modelo', imgUrl='image.png', idTipoAuto='$idTipo' WHERE idAuto='$idAuto';";
+        $fechaSalida=$request->{'fechaSalida'};
+        $fechaLlegada=$request->{'fechaLlegada'};
+        $idEstadoOrigen=$request->{'idEstadoOrigen'};
+        $idEstadoDestino=$request->{'idEstadoDestino'};
+        $idAerolinea=$request->{'idAerolinea'};
+        $horaSalida=$request->{'horaSalida'};
+        $horaLlegada=$request->{'horaLlegada'};
+        $idVuelo=$request->{'idVuelo'};
+        
+        $query="UPDATE vueloA SET fechaSalida=STR_TO_DATE('$fechaSalida', '%m/%d/%Y') ,fechaLlegada=STR_TO_DATE('$fechaLlegada', '%m/%d/%Y') ,idEstadoOrigen='$idEstadoOrigen' ,idEstadoDestino='$idEstadoDestino' ,horaSalida='$horaSalida' ,horaLlegada='$horaLlegada' WHERE idVuelo=$idVuelo";
+        
         $result=$connectionA -> query($query);
         
-        $puertas=$aerolinea->{'puertas'};
-        $asientos=$aerolinea->{'asientos'};
-        $cajuela=$aerolinea->{'cajuela'};
-        $transmision=$aerolinea->{'transmision'};
-        $aire=$aerolinea->{'aire'};
-         
-        $query="UPDATE autoB SET puertas='$puertas' ,asientos='$asientos' ,cajuela='$cajuela' ,transmision='$transmision' ,aire='$aire' WHERE idAuto='$idAuto';";
-        $result=$connectionB -> query($query);
-        //echo $agencia->{'msg'};
         
-        $imagen= $aerolinea->{'imagen'};
-        if($imagen!=""){
-            if (file_exists("../img/autos/$idAuto.png")) {
-                unlink("../img/autos/$idAuto.png");
+        
+        $disponiblesPrimera=$request->{'disponiblesPrimera'};
+        $disponiblesEjecutiva=$request->{'disponiblesEjecutiva'};
+        $disponiblesTurista=$request->{'disponiblesTurista'};
+        $cuotaPrimera=$request->{'cuotaPrimera'};
+        $cuotaEjecutiva=$request->{'cuotaEjecutiva'};
+        $cuotaTurista=$request->{'cuotaTurista'};
+        
+        
+        $query="UPDATE vueloB SET disponiblesPrimera='$disponiblesPrimera',disponiblesEjecutiva='$disponiblesEjecutiva',disponiblesTurista='$disponiblesTurista',cuotaPrimera='$cuotaPrimera',cuotaEjecutiva='$cuotaEjecutiva',cuotaTurista='$cuotaTurista') WHERE idVuelo=$idVuelo;";
+        $result=$connectionB -> query($query);
+        
+        if(isset($request->{'imagen'})){
+            $imagen= $request->{'imagen'};
+            if($imagen!=""){
+                if (file_exists("../img/vuelos/$idVuelo.png")) {
+                    unlink("../img/vuelos/$idVuelo.png");
+                }
+                $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
+                file_put_contents("../img/vuelos/$idVuelo.png", $imagen);
             }
-            $imagen = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imagen));
-            file_put_contents("../img/autos/$idAuto.png", $imagen);
         }
         //$respuesta=array("id"=>$id,"nombre"=>$nombre,"telefono"=>$telefono,"logoUrl"=>"","imgUrl"=>"img/hoteles/$id.png?".time(),"estado"=>$estado,"municipio"=>$municipio,"calle"=>$calle,"numero"=>$numero,"codigopostal"=>$codigopostal,"idEstado"=>$idEstado,"idMunicipio"=>$idMunicipio,"idDireccion"=>$idDireccion);
-        $aerolinea->{'imgUrl'}="img/autos/$idAuto.png?".time();
+        $request->{'imgUrl'}="img/vuelos/$idVuelo.png?".time();
         
-        $respuesta=$aerolinea;
+        $respuesta=$request;
         echo json_encode($respuesta);
         break;
     case "DELETE"://eliminar

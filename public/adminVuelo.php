@@ -24,7 +24,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
         <link rel="stylesheet" href="assets/css/style.css">
 
         <link rel="stylesheet" href="../bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css">
-
+        <link rel="stylesheet" href="../bower_components/timerpicker/jquery.timepicker.css">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -159,7 +159,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Estado Origen:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <select name="estadoOrigen" class="form-control" id="selectOrigen" ng-options="item.idEstado as item.estado for item in estados" ng-model="nuevo.idEstadoOrigen">
+                                                <select name="estadoOrigen" class="form-control" id="selectOrigen" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstadoOrigen">
                                                 </select>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
@@ -170,7 +170,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Estado Destino:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <select name="estadoDestino" class="form-control" id="selectDestino" ng-options="item.idEstado as item.estado for item in estados" ng-model="nuevo.idEstadoDestino">
+                                                <select name="estadoDestino" class="form-control" id="selectDestino" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstadoDestino">
                                                 </select>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
@@ -181,19 +181,20 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <label for="">Hora Salida:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input name="horaSalida" type="text" class="form-control" ng-model="nuevo.horaSalida" placeholder="Hora Salida" required>
-                                            </div>
+                                            <i class="fa fa-home fa-fw"></i>
+                                            <input id="timepicker1" name="horaSalida" type="text" class="form-control" ng-model="nuevo.horaSalida" placeholder="Hora Salida">
+
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
+
+
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="">Hora Llegada:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="horaLlegada" type="text" class="form-control" ng-model="nuevo.horaLlegada" placeholder="Hora Llegada" required>
+                                                <input id="timepicker2" name="horaLlegada" type="text" class="form-control" ng-model="nuevo.horaLlegada" placeholder="Hora Llegada">
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -205,7 +206,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Asientos Primera Clase:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input name="disponiblesPrimera" type="text" class="form-control" ng-model="nuevo.disponiblesPrimera" placeholder="Asientos Primera Clase" required>
+                                                <input id="timepicker2" name="disponiblesPrimera" type="text" class="form-control" ng-model="nuevo.disponiblesPrimera" placeholder="Asientos Primera Clase" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -237,7 +238,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Costo Primera Clase:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input name="costoPrimera" type="text" class="form-control" ng-model="nuevo.costoPrimera" placeholder="Costos Primera Clase" required>
+                                                <input name="costoPrimera" type="text" class="form-control" ng-model="nuevo.cuotaPrimera" placeholder="Costos Primera Clase" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -247,7 +248,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Costo Clase Ejecutiva:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="costoEjecutiva" type="text" class="form-control" ng-model="nuevo.costoEjecutiva" placeholder="Costo Clase Ejecutiva" required>
+                                                <input name="costoEjecutiva" type="text" class="form-control" ng-model="nuevo.cuotaEjecutiva" placeholder="Costo Clase Ejecutiva" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -257,7 +258,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Costo Clase Turista:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="costoTurista" type="text" class="form-control" ng-model="nuevo.costoTurista" placeholder="Costo Clase Turista" required>
+                                                <input name="costoTurista" type="text" class="form-control" ng-model="nuevo.cuotaTurista" placeholder="Costo Clase Turista" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -297,8 +298,15 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
     <script src="../bower_components/Toaster/jquery.toaster.js"></script>
 
     <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../bower_components/timerpicker/jquery.timepicker.min.js"></script>
     <script>
         $(function () {
+            $('#timepicker1').timepicker({
+                'timeFormat': 'H:i:s'
+            });
+            $('#timepicker2').timepicker({
+                'timeFormat': 'H:i:s'
+            });
             $("#datepicker").datepicker();
             $("#datepicker2").datepicker();
         });
@@ -377,7 +385,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             /*-----------------------------Eliminar---------------------------------------------*/
             $scope.eliminar = function (index) {
                 controller.service.delete({
-                        id: $scope.lista[index].idAuto
+                        id: $scope.lista[index].idVuelo
                     }, function (response) {
                         $scope.lista.splice(index, 1);
                         $.toaster({
@@ -401,6 +409,13 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             /*------------------------------------Modificar------------------------------------*/
             $scope.modificar = function (index) {
+                $scope.nuevo.horaSalida = $("#timepicker1").val();
+                $scope.nuevo.horaLlegada = $("#timepicker2").val();
+
+                $scope.nuevo.fechaSalida = $("#datepicker").val();
+                $scope.nuevo.fechaLlegada = $("#datepicker2").val();
+                $scope.nuevo.estadoOrigen = $('#selectOrigen option:selected').text();
+                $scope.nuevo.estadoDestino = $('#selectDestino option:selected').text();
                 console.log($scope.nuevo);
                 $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
 
@@ -432,18 +447,21 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             //-------------------------Insertar------------------------------------//
             $scope.insertar = function () {
-                var obj = $.grep($scope.agencias, function (e) {
-                    return e.id == $scope.agencia;
-                });
-                console.log(obj[0]);
-                $scope.nuevo.estado = obj[0].estado;
-                $scope.nuevo.municipio = obj[0].municipio;
-                $scope.nuevo.idAgencia = $scope.agencia;
+                $scope.nuevo.horaSalida = $("#timepicker1").val();
+                $scope.nuevo.horaLlegada = $("#timepicker2").val();
+                $scope.nuevo.fechaSalida = $("#datepicker").val();
+                $scope.nuevo.fechaLlegada = $("#datepicker2").val();
+                $scope.nuevo.estadoOrigen = $('#selectOrigen option:selected').text();
+                $scope.nuevo.estadoDestino = $('#selectDestino option:selected').text();
+
+                $scope.nuevo.idAerolinea = $scope.aerolinea;
                 $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
                 $scope.nuevo.imagenNombre = $('input[type=file]').val().split('\\').pop();
                 console.log($scope.nuevo);
                 controller.service.save($scope.nuevo).$promise.then(function (response) {
-                    //console.log(response);
+                    console.log(response);
+
+
                     $scope.lista.push(response);
                     $.toaster({
                         priority: 'success'
@@ -451,7 +469,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         , message: 'Registro insertado'
                     });
                 }, function (response) {
-                    console.log(response + "");
+                    console.log(response);
+
                     $.toaster({
                         priority: 'danger'
                         , title: 'Error'
