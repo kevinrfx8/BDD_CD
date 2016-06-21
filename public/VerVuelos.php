@@ -18,12 +18,12 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
         <link rel="stylesheet" href="../bower_components/bootstrap/less/bootstrap.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
         <link rel="stylesheet" href="../bower_components/bootstrap/less/bootstrap.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="../bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css">
 
+        <link rel="stylesheet" href="../bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -34,85 +34,80 @@
 
     <body ng-controller="controller">
         <?php require('templates/header.php');?>
-            <main>
-                <div class="container">
+
+            <div class="container">
+                <div class="row">
                     <h2>Ver Vuelos</h2>
+                </div>
+
+                <form class="" id="filtros">
                     <div class="row">
-                        <form class="col s12" id="filtros">
-                            <div class="row">
-                                <!-- fecha salida -->
-                                <div class='col-sm-2'>
-                                    <p>
+                        <div class="col-xs-2 input-group-lg">
+                            <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
+                            <label>Fecha Salida</label>
+                            <input type="text" id="datepicker" class="form-control" placeholder="Seleccionar...">
 
-                                        <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
-                                        <label>Fecha Salida</label>
-                                        <input type="text" id="datepicker" placeholder="Seleccionar...">
+                        </div>
+                        <div class="col-xs-3 input-group-lg">
+                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                            <label for="sel1">Edo Salida</label>
+                            <select class="form-control" id="sel1">
+                                <option>TE ODIO KEV</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3 input-group-lg">
+                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                            <label for="sel1">Edo Llegada</label>
+                            <select class="form-control" id="sel1">
+                                <option>TE ODIO KEV</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2 input-group-lg">
+                            <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+                            <label for="sel1">Aerolinea</label>
+                            <select class="form-control" id="sel1">
+                                <option>TE ODIO KEV</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2 input-group-lg">
+                            <label for=""></label>
+                            <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#modal" ng-click="limpiar()">Nuevo Vuelo</button>
+                        </div>
+                    </div>
 
-                                    </p>
-                                </div>
-                                <!-- Edo Salida -->
-                                <div class='col-sm-2'>
-                                    <div class="form-group">
-                                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                                        <label for="sel1">Edo Salida</label>
-                                        <select class="form-control" id="sel1">
-                                            <option>TE ODIO KEV</option>
-                                        </select>
-                                    </div>
-                                </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker1').datetimepicker();
+                        });
+                    </script>
 
-                                <!-- Edo Llegada -->
-                                <div class='col-sm-2'>
-                                    <div class="form-group">
-                                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                                        <label for="sel1">Edo Llegada</label>
-                                        <select class="form-control" id="sel1">
-                                            <option>TE ODIO KEV</option>
-                                        </select>
-                                    </div>
-                                </div>
 
-                                <!-- Aerolinea -->
-                                <div class='col-sm-2'>
-                                    <div class="form-group">
-                                        <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
-                                        <label for="sel1">Aerolinea</label>
-                                        <select class="form-control" id="sel1">
-                                            <option>TE ODIO KEV</option>
-                                        </select>
-                                    </div>
-                                </div>
+                    <!-- Div con imagen y texto-->
 
-                                <!--Boton Buscar -->
-                                <div class='col-sm-2'>
-                                    <div class="btn-group" role="group" aria-label="...">
-                                        <button type="button" class="btn btn-default">Buscar</button>
-                                    </div>
-                                    <script type="text/javascript">
-                                        $(function () {
-                                            $('#datetimepicker1').datetimepicker();
-                                        });
-                                    </script>
-                                </div>
 
-                                <!-- Div con imagen y texto-->
-                                <div class='col-sm-12'>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="img-rounded" src="https://inn.org/wp-content/uploads/2015/03/NerdAlertBannerSquare-140x140-140x140.png" alt="Generic placeholder image">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading"><b>Aquí debería de ir algo :)</b></h4> NO TIENES IDEA DE CUANTO TE ODIO PINSHI PATO GAY :V
-                                        </div>
-                                    </div>
-                                </div>
+                </form>
+
+                <br>
+                <br>
+                <div class="row">
+
+                    <div class='col--12'>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="img-rounded" src="https://inn.org/wp-content/uploads/2015/03/NerdAlertBannerSquare-140x140-140x140.png" alt="Generic placeholder image">
+                                </a>
                             </div>
-                        </form>
+                            <div class="media-body">
+                                <h4 class="media-heading"><b>Aquí debería de ir algo :)</b></h4> NO TIENES IDEA DE CUANTO TE ODIO PINSHI PATO GAY :V
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </main>
+            </div>
+
+
+
             <?php require('templates/footer.php');?>
     </body>
     <script src="../bower_components/angular/angular.min.js "></script>

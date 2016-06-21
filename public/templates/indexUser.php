@@ -1,50 +1,44 @@
-<div class="container">
-    <h1>Panel de Administración</h1>
-    <div class="row">
-        <div class="col s12">
-            <div class="card">
+<header id="myCarousel" class="carousel slide">
 
-                <div class="card-content valign-wrapper">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
 
-                    <i class="large material-icons left">flight</i>
-                    <div>
-                        <span class="card-title valign">Administrar Aerolineas</span>
-                        <span class="card-title valign">Administrar Vuelos</span>
-                    </div>
-
-
-                </div>
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <!-- Set the first background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('img/index1.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>Cancún $1599</h2>
+                <h5>Precio por noche. Consulte hoteles participantes.</h5>
             </div>
         </div>
-        <div class="col s12">
-            <div class="card">
-
-                <div class="card-content valign-wrapper">
-
-                    <i class="large material-icons left">directions_car</i>
-                    <div>
-                        <span class="card-title valign">Administrar Gencias de Autos</span>
-                        <span class="card-title valign">Administrar Autos</span>
-                    </div>
-
-
-                </div>
+        <div class="item">
+            <!-- Set the second background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('img/index2.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>Vallarta $989</h2>
+                <h5>Precio por noche. Consulte hoteles participantes.</h5>
             </div>
         </div>
-        <div class="col s12">
-            <div class="card">
-
-                <div class="card-content valign-wrapper">
-
-                    <i class="large material-icons left">hotel</i>
-                    <div>
-                        <span class="card-title valign">Administrar Hoteles</span>
-                        <span class="card-title valign">Administrar Habitaciones</span>
-                    </div>
-
-
-                </div>
+        <div class="item">
+            <!-- Set the third background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('img/index3.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>Aeroméxico 3x2</h2>
+                <h5>Consulte destinos participantes. Aplican restricciones.</h5>
             </div>
         </div>
     </div>
-</div>
+
+</header>
+
+<script>
+    $('.carousel').carousel({
+        interval: 3000 //changes the speed
+    })
+</script>
