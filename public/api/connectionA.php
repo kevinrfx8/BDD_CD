@@ -1,6 +1,6 @@
 <?PHP            
     function connect(){
-        $servername = "192.168.93.131";
+        $servername = "192.168.93.132";
         $username = "root";
         $password = "1234";
         $database = "BDDA";

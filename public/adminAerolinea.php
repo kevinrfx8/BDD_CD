@@ -1,9 +1,11 @@
 <?php 
     session_start();
-    
-//if(!isset(SESSION['id'])){
+    /*
+if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
     //mandar al carajo
-//}
+        header('Location: index.php');
+        }
+*/
 
 ?>
     <!DOCTYPE html>
@@ -63,26 +65,36 @@
 
                                     <tbody>
                                         <tr ng-repeat="aerolinea in aerolineas|filter:filtro ">
-                                            <td>{{aerolinea.nombre}}</td>
-                                            <td>{{aerolinea.telefono}}</td>
-                                            <td>{{aerolinea.sitioWeb}}</td>
-                                            <td>
+                                            <td class="vert-align">{{aerolinea.nombre}}</td>
+                                            <td class="vert-align">{{aerolinea.telefono}}</td>
+                                            <td class="vert-align">{{aerolinea.sitioWeb}}</td>
+                                            <td class="vert-align">
                                                 <img src="" alt="" ng-src="{{aerolinea.imgUrl}}" width="100" height="75">
                                             </td>
-                                            <td>
+                                            <td class="vert-align">
                                                 <a href="" ng-click="eliminar(aerolineas.indexOf(aerolinea))">
                                                     <span class="fa fa-close fa-3x"></span>
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td class="vert-align">
                                                 <a href="" type="button" class="" data-toggle="modal" data-target="#agregar" ng-click="verAerolinea(aerolinea,aerolineas.indexOf(aerolinea))"><span class="fa fa-edit fa-3x"></span></a>
 
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-
-
+                            </div>
+                            <!-- Mensajes de carga -->
+                            <div class="row">
+                                <div class="col-sx-12">
+                                    <div class="loader center-block" ng-show="cargando"></div>
+                                    <div class="alert alert-info" ng-show="aerolineas.length==0 && !error && !cargando">
+                                        <strong>Info!</strong> No se encontraron registros.
+                                    </div>
+                                    <div class="alert alert-warning" ng-show="error">
+                                        <strong>Advertencia!</strong> No se pudo cargar los registos. Intente más tarde.
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -95,7 +107,7 @@
                     <div class="modal-content ">
                         <!-- modal header-->
                         <div class="modal-header">
-                            <h3>{{bandNuevo ? 'Aereolinea Nueva ':'Modificar Aerolinea '}}</h3>
+                            <h2>{{bandNuevo ? 'Aereolinea Nueva ':'Modificar Aerolinea '}}</h2>
                         </div>
                         <!-- modal body -->
                         <div class="modal-body">
@@ -105,20 +117,30 @@
                                     <div class="row">
                                         <div class="input-group margin-bottom-sm" id="nuevoNombre">
                                             <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
-                                            <input id="modalNombre" type="text" class="form-control" ng-model="nuevo.nombre" placeholder="Nombre" required>
+                                            <input id="modalNombre" name="nombre" type="text" class="form-control" ng-model="nuevo.nombre" placeholder="Nombre" required>
+                                        </div>
+                                        <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.nombre.$touched && formAerolinea.nombre.$invalid}">
+                                            <strong>Atención!</strong> Es requerido
                                         </div>
                                         <div class="input-group margin-bottom-sm " id="nuevoNombre">
                                             <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                            <input id="modalTelefono" type="text" class="form-control" ng-model="nuevo.telefono" placeholder="Teléfono">
+                                            <input name="telefono" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.telefono" placeholder="Teléfono" required>
+                                        </div>
+                                        <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.telefono.$touched && formAerolinea.telefono.$invalid}">
+                                            <strong>Atención!</strong> Es requerido
                                         </div>
                                         <div class="input-group margin-bottom-sm " id="nuevoNombre">
                                             <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
-                                            <input id="modalSitio" type="text" class="form-control" ng-model="nuevo.sitioWeb" placeholder="Sitio Web">
+                                            <input name="sitio" id="modalSitio" type="text" class="form-control" ng-model="nuevo.sitioWeb" placeholder="Sitio Web" required>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="file" fileread="nuevo.imagen" ng-model="nuevo.imagenNombre" name="nuevoNombreImagen">
-                                            <p class="help-block">Suba una imagen</p>
+                                        <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.sitio.$touched && formAerolinea.sitio.$invalid}">
+                                            <strong>Atención!</strong> Es requerido
                                         </div>
+                                        <label class="btn btn-primary btn-file">
+                                            <input id="subirArchivo" type="file" fileread="nuevo.imagen" ng-model="nuevo.imagenNombre" name="nuevoNombreImagen" style="display: none;" onchange="$('#upload-file-info').html($(this).val());">
+                                            <p>Suba una imagen</p>
+                                        </label>
+                                        <span id="upload-file-info"></span>
 
                                     </div>
 
@@ -130,7 +152,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="limpiar()">Cancelar</button>
                             <button type="button" class="btn btn-primary" ng-click="insertar()" ng-show="bandNuevo" ng-disabled="!formAerolinea.$valid" data-dismiss="modal">Guardar</button>
-                            <button type="button" class="btn btn-primary" ng-click="modificar()" ng-hide="bandNuevo" data-dismiss="modal">Modificar</button>
+                            <button type="button" class="btn btn-primary" ng-click="modificar()" ng-hide="bandNuevo" data-dismiss="modal" ng-disabled="!formAerolinea.$valid">Modificar</button>
 
                         </div>
 
@@ -143,10 +165,11 @@
     <script src="../bower_components/angular-resource/angular-resource.min.js "></script>
     <script src="../bower_components/jquery/dist/jquery.min.js "></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/Toaster/jquery.toaster.js"></script>
     <script>
         var app = angular.module('app', ['ngResource']);
         //app.constant('baseURL', 'http://localhost:3000/');
-        app.constant('baseURL', 'http://localhost:8080/AgenciaVacacional4/public/api/');
+        app.constant('baseURL', 'http://localhost:8080/BDD_CD/public/api/');
         app.directive("fileread", [function () {
             return {
                 scope: {
@@ -176,6 +199,8 @@
         }]);
 
         app.controller('controller', ['$scope', 'factory', function ($scope, factory) {
+            $scope.cargando = true;
+            $scope.error = false;
             $scope.seleccionado = "";
             $scope.bandNuevo = false;
             $scope.nuevo = {
@@ -190,30 +215,45 @@
             $scope.titulo = true;
             $scope.aerolineas = [];
             this.service = factory.getInfo();
-            //traer todos los registros
+            /*--------------------------------Cargar Registros de inicio-------------------------*/
             this.service.query(
                 function (response) {
                     $scope.aerolineas = response;
+                    $scope.cargando = false;
                     //console.log("res" + response);
 
                 }
                 , function (response) {
-                    //console.log("err" + response);
+                    $scope.error = true;
+                    $scope.cargando = false;
+                    console.log("err" + response);
                 });
-            //eliminar
+            /*-----------------------------Eliminar---------------------------------------------*/
             $scope.eliminar = function (index) {
                 controller.service.delete({
                         id: $scope.aerolineas[index].id
                     }, function (response) {
                         $scope.aerolineas.splice(index, 1);
+                        $.toaster({
+                            priority: 'success'
+                            , title: 'Exito'
+                            , message: 'Aerolinea Eliminada'
+                        });
+
 
                     }
                     , function (response) {
+                        $.toaster({
+                            priority: 'danger'
+                            , title: 'Error'
+                            , message: 'No se pudo eliminar la aerolinea!'
+                        });
+
 
                     });
 
             };
-            //modificar
+            /*------------------------------------Modificar------------------------------------*/
             $scope.modificar = function (index) {
                 console.log($scope.nuevo);
                 controller.service.update({
@@ -222,28 +262,54 @@
                         console.log(response);
                         $scope.aerolineas.splice($scope.seleccionado, 1);
                         $scope.aerolineas.push(response);
-
+                        $.toaster({
+                            priority: 'success'
+                            , title: 'Exito'
+                            , message: 'Aerolinea Modificada'
+                        });
 
 
                         //$scope.aerolineas.splice(index, 1);
 
                     }
                     , function (response) {
-
+                        $.toaster({
+                            priority: 'danger'
+                            , title: 'Error'
+                            , message: 'No se pudo modificar la aerolinea'
+                        });
                     });
 
                 console.log(index);
             };
-            //nuevo
+            //-------------------------Insertar------------------------------------//
             $scope.insertar = function () {
+
                 $scope.nuevo.imagenNombre = $('input[type=file]').val().split('\\').pop();
                 console.log($scope.nuevo);
-                controller.service.save($scope.nuevo, function (response) {
+                controller.service.save($scope.nuevo).$promise.then(function (response) {
                     console.log(response);
                     $scope.aerolineas.push(response);
+                    $.toaster({
+                        priority: 'success'
+                        , title: 'Exito'
+                        , message: 'Aerolinea agregada'
+                    });
+                }, function (response) {
+                    $.toaster({
+                        priority: 'danger'
+                        , title: 'Error'
+                        , message: 'No se pudo agregar la aerolinea'
+                    });
                 });
             };
+            /*-----------------------------Limpiar-----------------------------------*/
             $scope.limpiar = function () {
+                angular.forEach($scope.formAerolinea, function (input) {
+                    if (input && input.hasOwnProperty('$viewValue')) {
+                        input.$setUntouched();
+                    }
+                });
                 $scope.bandNuevo = true;
                 $scope.nuevo = {
                     id: ""
@@ -252,8 +318,10 @@
                     , sitioWeb: ""
                     , imagen: ""
                     , imgUrl: ""
-                }
+                };
+                $("#subirArchivo").val("");
             };
+            /*--------------------------------Ver en modal---------------------------*/
             $scope.verAerolinea = function (aerolinea, index) {
                 $scope.bandNuevo = false;
                 $scope.nuevo = angular.copy(aerolinea);

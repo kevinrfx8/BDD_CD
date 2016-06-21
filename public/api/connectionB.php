@@ -1,6 +1,6 @@
 <?PHP            
-    function connect(){
-        $servername = "192.168.93.132";
+    function connect2(){
+        $servername = "192.168.93.131";
         $username = "root";
         $password = "1234";
         $database = "BDDB";
@@ -17,7 +17,7 @@
         
     }
 
-    function disconnect($connection){
+    function disconnect2($connection){
         $disconnect = mysqli_close($connection);
     }
 ?>
