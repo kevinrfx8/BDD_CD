@@ -37,14 +37,14 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
 
             <main>
                 <div class="container">
-                    <h2>Autos</h2>
+                    <h2>Habitaciones</h2>
                     <div class="row">
                         <form class="col s12" id="filtros">
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="input-group-lg">
-                                        <label for="">Agencias:</label>
-                                        <select name="agencias" class="form-control" id="selectAgencia" ng-options="item.id as item.nombre for item in agencias" ng-model="agencia" ng-change="getAutos()" required>
+                                        <label for="">Hotele:</label>
+                                        <select name="agencias" class="form-control" id="selectAgencia" ng-options="item.id as item.nombre for item in hoteles" ng-model="hotel" ng-change="getHabitaciones()" required>
                                         </select>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <div class="col-xs-2">
                                     <div class="input-group-lg">
                                         <label for=""> </label>
-                                        <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#modal" ng-click="limpiar()">Nuevo Auto</button>
+                                        <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#modal" ng-click="limpiar()">Nueva Habitación</button>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <tr>
                                             <th data-field="id ">Tipo</th>
                                             <th data-field="name ">Precio</th>
-                                            <th data-field="name ">Modelo</th>
+                                            <th data-field="name ">Descripción</th>
 
                                             <th data-field="price ">Estado</th>
                                             <th data-field="price ">Municipio</th>
@@ -81,9 +81,9 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
 
                                     <tbody>
                                         <tr ng-repeat="item in lista|filter:filtro ">
-                                            <td class="vert-align">{{item.descripcion}}</td>
+                                            <td class="vert-align">{{item.tipoHabitacion}}</td>
                                             <td class="vert-align">{{item.precio}}</td>
-                                            <td class="vert-align">{{item.modelo}}</td>
+                                            <td class="vert-align">{{item.descripcion}}</td>
                                             <td class="vert-align">{{item.estado}}</td>
                                             <td class="vert-align">{{item.municipio}}</td>
                                             <td class="vert-align">
@@ -125,7 +125,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     <div class="modal-content ">
                         <!-- modal header-->
                         <div class="modal-header">
-                            <h2>{{bandNuevo ? 'Auto Nuevo ':'Modificar Auto '}}</h2>
+                            <h2>{{bandNuevo ? 'Habitación Nueva ':'Modificar Habitación '}}</h2>
                         </div>
                         <!-- modal body -->
                         <div class="modal-body">
@@ -134,42 +134,10 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <form class="" id="form" name="form">
                                     <div class="row">
                                         <div class="col-xs-4">
-                                            <label for="">Precio:</label>
+                                            <label for="">Tipo Habitación:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="modalPrecio" name="precio" type="text" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
-                                            </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Modelo:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="modelo" id="modalModelo" type="text" class="form-control" ng-model="nuevo.modelo" placeholder="Modelo" required>
-                                            </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Puertas:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="puertas" id="modalPuertas" type="text" class="form-control" ng-model="nuevo.puertas" placeholder="Puertas" required>
-                                            </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <label for="">Tipo Auto:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <select name="tipo" class="form-control" id="selectTipo" ng-options="item.idTipoAuto as item.descripcion for item in tipos" ng-model="nuevo.idTipoAuto" required>
+                                                <select name="tipo" class="form-control" id="selectTipo" ng-options="item.idTipoHabitacion as item.tipoHabitacion for item in tipos" ng-model="nuevo.idTipoHabitacion" required>
                                                 </select>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
@@ -177,20 +145,10 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
-                                            <label for="">Asientos:</label>
+                                            <label for="">Precio:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="asiento" id="modalAsiento" type="text" class="form-control" ng-model="nuevo.asientos" placeholder="Asientos" required>
-                                            </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Cajuela:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="cajuela" id="modalCajuela" type="text" class="form-control" ng-model="nuevo.cajuela" placeholder="Cajuela" required>
+                                                <input name="precio" id="modalPrecio" type="text" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
@@ -198,23 +156,13 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-4">
-                                            <label for="">Transmisión:</label>
+                                        <div class="col-xs-12">
+                                            <label for="">Descripción:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="modalTransmision" name="transmision" type="text" class="form-control" ng-model="nuevo.transmision" placeholder="Transmisión" required>
+                                                <input id="modalDescripcion" name="descripcion" type="text" class="form-control" ng-model="nuevo.descripcion" placeholder="Descripción" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <label for="">Aire:</label>
-                                            <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="aire" id="modalModelo" type="text" class="form-control" ng-model="nuevo.aire" placeholder="Aire" required>
-                                            </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
                                                 <strong>Atención!</strong> Es requerido
                                             </div>
                                         </div>
@@ -274,21 +222,21 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
         }]);
         app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
             this.getInfo = function () {
-                return $resource(baseURL + 'autos.php', null, {
+                return $resource(baseURL + 'habitaciones.php', null, {
                     'update': {
                         method: 'PUT'
                     }
                 });
             };
-            this.getAgencias = function () {
-                return $resource(baseURL + 'agencias.php', null, {
+            this.getHoteles = function () {
+                return $resource(baseURL + 'hoteles.php', null, {
                     'update': {
                         method: 'PUT'
                     }
                 });
             };
             this.getTipo = function () {
-                return $resource(baseURL + 'tipoAutos.php', null, {
+                return $resource(baseURL + 'tipoHabitaciones.php', null, {
                     'update': {
                         method: 'PUT'
                     }
@@ -302,32 +250,18 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             $scope.seleccionado = "";
             $scope.bandNuevo = false;
             $scope.agencias = [];
-            /*$scope.nuevo = {
-                id: ""
-                , nombre: ""
-                , telefono: ""
-                , imagen: ""
-                , imgUrl: ""
-                , estdo: ""
-                , municipio: ""
-                , calle: ""
-                , numero: ""
-                , codigopostal: ""
-                , idEstado: ""
-                , idMunicipio: ""
-            };*/
             $scope.nuevo = {};
             var controller = this;
             $scope.titulo = true;
             $scope.lista = [];
             this.service = factory.getInfo(); //get autos
-            this.serviceAgencias = factory.getAgencias();
+            this.serviceHoteles = factory.getHoteles();
             this.serviceTipo = factory.getTipo();
 
             /*--------------------------------Cargar Registros de inicio-------------------------*/
-            this.serviceAgencias.query(
+            this.serviceHoteles.query(
                 function (response) {
-                    $scope.agencias = response;
+                    $scope.hoteles = response;
 
                 }
                 , function (response) {});
@@ -338,7 +272,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             /*-----------------------------Eliminar---------------------------------------------*/
             $scope.eliminar = function (index) {
                 controller.service.delete({
-                        id: $scope.lista[index].idAuto
+                        id: $scope.lista[index].idHabitacion
                     }, function (response) {
                         $scope.lista.splice(index, 1);
                         $.toaster({
@@ -363,7 +297,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             /*------------------------------------Modificar------------------------------------*/
             $scope.modificar = function (index) {
                 console.log($scope.nuevo);
-                $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
+                $scope.nuevo.tipoHabitacion = $('#selectTipo option:selected').text();
 
                 controller.service.update({
                         id: $scope.nuevo.idAuto
@@ -393,14 +327,14 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             };
             //-------------------------Insertar------------------------------------//
             $scope.insertar = function () {
-                var obj = $.grep($scope.agencias, function (e) {
-                    return e.id == $scope.agencia;
+                var obj = $.grep($scope.hoteles, function (e) {
+                    return e.id == $scope.hotel;
                 });
                 console.log(obj[0]);
                 $scope.nuevo.estado = obj[0].estado;
                 $scope.nuevo.municipio = obj[0].municipio;
-                $scope.nuevo.idAgencia = $scope.agencia;
-                $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
+                $scope.nuevo.idHotel = $scope.hotel;
+                $scope.nuevo.tipoHabitacion = $('#selectTipo option:selected').text();
                 $scope.nuevo.imagenNombre = $('input[type=file]').val().split('\\').pop();
                 console.log($scope.nuevo);
                 controller.service.save($scope.nuevo).$promise.then(function (response) {
@@ -423,7 +357,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
             /*-----------------------------Limpiar-----------------------------------*/
             $scope.limpiar = function () {
 
-                console.log($scope.agencia);
+                console.log($scope.hotel);
                 //$scope.municipios = [];
                 angular.forEach($scope.form, function (input) {
                     if (input && input.hasOwnProperty('$viewValue')) {
@@ -431,6 +365,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     }
                 });
                 $scope.bandNuevo = true;
+                $scope.nuevo = {};
                 /*$scope.nuevo = {
                     id: ""
                     , nombre: ""
@@ -458,9 +393,10 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                 $scope.seleccionado = index;
 
             };
-            $scope.getAutos = function () {
+            $scope.getHabitaciones = function () {
+                console.log($scope.hotel);
                 controller.service.query({
-                        id: $scope.agencia
+                        id: $scope.hotel
                     }
                     , function (response) {
                         $scope.lista = response;
