@@ -50,7 +50,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
-                                    
+
                                     <div class="input-group-lg">
                                         <span class="fa fa-search fa-2x "></span>
                                         <input id="icon_prefix" type="text" class="form-control" ng-model="filtro" placeholder="Buscar">
@@ -149,7 +149,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Precio:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
-                                                <input name="precio" id="modalPrecio" type="number"  step="0.01" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
+                                                <input name="precio" id="modalPrecio" type="text" step="0.01" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.precio.$touched && form.precio.$invalid}">
                                                 <strong>Atención!</strong> Enteros y Decimales solamente

@@ -138,7 +138,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Precio:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
-                                                <input id="modalPrecio" name="precio" type="number" class="form-control" step="0.01"  ng-model="nuevo.precio" placeholder="Precio" required>
+                                                <input id="modalPrecio" name="precio" type="text" class="form-control" step="0.01" ng-model="nuevo.precio" placeholder="Precio" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.precio.$touched && form.precio.$invalid}">
                                                 <strong>Atención!</strong> Enteros y Decimales solamente
@@ -158,7 +158,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Puertas:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-hdd-o fa-fw"></i></span>
-                                                <input name="puertas" id="modalPuertas" type="number" class="form-control" min="2" max="8" ng-model="nuevo.puertas" placeholder="Puertas" required>
+                                                <input name="puertas" id="modalPuertas" type="text" class="form-control" min="2" max="8" ng-model="nuevo.puertas" placeholder="Puertas" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.puertas.$touched && form.puertas.$invalid}">
                                                 <strong>Atención!</strong> Numéricos solamente de 1 cifra entre 2 y 8
@@ -181,7 +181,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Asientos:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-square fa-fw"></i></span>
-                                                <input name="asiento" id="modalAsiento" type="number" class="form-control" min="2" max="8" ng-model="nuevo.asientos" placeholder="Asientos" required>
+                                                <input name="asiento" id="modalAsiento" type="text" class="form-control" min="2" max="8" ng-model="nuevo.asientos" placeholder="Asientos" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.asiento.$touched && form.asiento.$invalid}">
                                                 <strong>Atención!</strong> Numéricos solamente de 1 cifra entre 2 y 8
@@ -191,11 +191,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Cajuela:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-car fa-fw"></i></span>
-                                                <select name="cajuela" class="form-control" ng-model="nuevo.cajuela" required>
-                                                    <option value="Grande">Grande</option>
-                                                    <option value="Mediana">Mediana</option>
-                                                    <option value="Chica">Chica</option>
-                                                </select>
+                                                <input name="cajuela" id="" type="text" class="form-control" min="2" max="8" ng-model="nuevo.cajuela" placeholder="Cajuela" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.cajuela.$touched && form.cajuela.$invalid}">
                                                 <strong>Atención!</strong> Seleccione una opción
@@ -207,11 +203,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Transmisión:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-map-pin fa-fw"></i></span>
-                                                <select name="transmision" class="form-control" ng-model="nuevo.transmision" required>
-                                                    <option value="Estandar">Estandar</option>
-                                                    <option value="Automatica">Automatica</option>
-                                                </select>
-                                                </div>
+                                                <input name="transmision" id="" type="text" class="form-control" min="2" max="8" ng-model="nuevo.transmision" placeholder="Transmisión" required>
+                                            </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.transmision.$touched && form.transmision.$invalid}">
                                                 <strong>Atención!</strong> Seleccione una opción
                                             </div>
@@ -220,10 +213,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Aire:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-spinner fa-fw"></i></span>
-                                                <select  name="aire" class="form-control" ng-model="nuevo.aire" required>
-                                                    <option value="Si" selected>Si</option>
-                                                    <option value="No">No</option>
-                                                </select>
+                                                <input name="aire" id="" type="text" class="form-control" min="2" max="8" ng-model="nuevo.aire" placeholder="Aire" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.aire.$touched && form.aire.$invalid}">
                                                 <strong>Atención!</strong> Seleccione una opción
@@ -441,6 +431,9 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     }
                 });
                 $scope.bandNuevo = true;
+                $scope.nuevo = {
+                    imagen: ""
+                };
                 /*$scope.nuevo = {
                     id: ""
                     , nombre: ""

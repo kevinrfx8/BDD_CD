@@ -89,13 +89,13 @@
                                 <h5>{{vuelo.horaSalida}}  {{vuelo.horaLlegada}}</h5>
                                 <h4>Costos:</h4>
                                 <h5>Primera Clase {{vuelo.cuotaPrimera|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesPrimera>0" ng-click="reservarVuelo('disponiblesPrimera',vuelo.idVuelo)">Reservar en Primera Clase</button>
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesPrimera>0" ng-click="reservarVuelo('disponiblesPrimera',vuelo.idVuelo,vuelo)">Reservar en Primera Clase</button>
                                 </h5>
                                 <h5>Clase Ejecutiva {{vuelo.cuotaEjecutiva|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesEjecutiva>0" ng-click="reservarVuelo('disponiblesEjecutiva',vuelo.idVuelo)">Reservar en Clase Ejecutiva</button>
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesEjecutiva>0" ng-click="reservarVuelo('disponiblesEjecutiva',vuelo.idVuelo,vuelo)">Reservar en Clase Ejecutiva</button>
                                 </h5>
                                 <h5>Clase Turista {{vuelo.cuotaTurista|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesTurista>0" ng-click="reservarVuelo('disponiblesTurista',vuelo.idVuelo)">Reservar en Clase Turista</button>
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesTurista>0" ng-click="reservarVuelo('disponiblesTurista',vuelo.idVuelo,vuelo)">Reservar en Clase Turista</button>
                                 </h5>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
         }]);
         app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
             this.getInfo = function () {
-                return $resource(baseURL + 'revervaVuelos.php', null, {
+                return $resource(baseURL + 'reservarVuelos.php', null, {
                     'update': {
                         method: 'PUT'
                     }
@@ -371,11 +371,23 @@
 
                 });
             };
-            $scope.reservarVuelo = function (tipo, idVuelo) {
+            $scope.reservarVuelo = function (tipo, idVuelo, vuelo) {
+
                 var reserva = {
                     tipo: tipo
                     , idVuelo: idVuelo
                 };
+                console.log(reserva);
+                controller.service.save(reserva).$promise.then(function (response) {
+                    vuelo[tipo] -= 1;
+                    console.log(response);
+                    $.toaster({
+                        priority: 'success'
+                        , title: 'Exito'
+                        , message: 'Reservación Hecha'
+                    });
+
+                });
 
             };
         }]);
