@@ -15,7 +15,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap 101 Template</title>
+        <title>Administración Autos</title>
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
@@ -37,14 +37,14 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
 
             <main>
                 <div class="container">
-                    <h2>Hoteles</h2>
+                    <h2>Autos</h2>
                     <div class="row">
                         <form class="col s12" id="filtros">
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="input-group-lg">
-                                        <span class="fa fa-building fa-2x "></span>
-                                        <label for="">Agencias:</label>
+                                        <span class="fa fa-car fa-2x "></span>
+                                        <label for="">Agecias:</label>
                                         <select name="agencias" class="form-control" id="selectAgencia" ng-options="item.id as item.nombre for item in agencias" ng-model="agencia" ng-change="getAutos()" required>
                                         </select>
                                     </div>
@@ -52,7 +52,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <div class="col-xs-6">
 
                                     <div class="input-group-lg">
-                                        
+                                        <span class="fa fa-search fa-2x "></span>
                                         <input id="icon_prefix" type="text" class="form-control" ng-model="filtro" placeholder="Buscar">
                                     </div>
                                 </div>

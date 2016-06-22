@@ -45,6 +45,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="input-group-lg">
+                                        <span class="fa fa-plane fa-2x "></span>
                                         <label for="">Aerolineas:</label>
                                         <select name="aerolineas" class="form-control" id="selectAerolinea" ng-options="item.id as item.nombre for item in aerolineas" ng-model="aerolinea" ng-change="getVuelos()" required>
                                         </select>
@@ -53,7 +54,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <div class="col-xs-6">
 
                                     <div class="input-group-lg">
-                                        <span class="fa fa-home fa-2x "></span>
+                                        <span class="fa fa-search fa-2x "></span>
                                         <input id="icon_prefix" type="text" class="form-control" ng-model="filtro" placeholder="Buscar">
                                     </div>
                                 </div>
