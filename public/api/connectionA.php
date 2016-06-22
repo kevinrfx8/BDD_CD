@@ -1,7 +1,7 @@
 <?PHP            
     function connect(){
-        $servername = "192.168.93.132";
-        $username = "root";
+        $servername = "localhost";
+        $username = "usuario";
         $password = "1234";
         $database = "BDDA";
         $conn = new mysqli($servername, $username, $password, $database);
