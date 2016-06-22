@@ -37,7 +37,7 @@
 
             <div class="container">
                 <div class="row">
-                    <h2>Ver Vuelos</h2>
+                    <h2>Ver Habitaciones</h2>
                 </div>
 
                 <form class="formConsulta">

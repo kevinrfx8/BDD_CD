@@ -61,13 +61,10 @@
                                 <h5>{{vuelo.horaSalida}}  {{vuelo.horaLlegada}}</h5>
                                 <h4>Costos:</h4>
                                             <h5>Primera Clase {{vuelo.cuotaPrimera|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesPrimera>0" ng-click="reservarVuelo('disponiblesPrimera',vuelo.idVuelo,vuelo)">Reservar en Primera Clase</button>
                                 </h5>
                                             <h5>Clase Ejecutiva {{vuelo.cuotaEjecutiva|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesEjecutiva>0" ng-click="reservarVuelo('disponiblesEjecutiva',vuelo.idVuelo,vuelo)">Reservar en Clase Ejecutiva</button>
                                 </h5>
                                             <h5>Clase Turista {{vuelo.cuotaTurista|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesTurista>0" ng-click="reservarVuelo('disponiblesTurista',vuelo.idVuelo,vuelo)">Reservar en Clase Turista</button>
                                 </h5>
                                         </div>
                                     </div>
@@ -77,7 +74,7 @@
 
                         </div>
                         <div id="hoteles" ng-show="{{!hoteles}}" class="tab-pane fade">
-                            <div class="row" ng-repeat="vuelo in vuelos" style="margin-top=30px;">
+                            <div class="row" ng-repeat="vuelo in habitaciones" style="margin-top=30px;">
 
                                 <div class='col-xs-12'>
                                     <div class="media">
@@ -87,14 +84,12 @@
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading"><h2>Precio por dia:{{vuelo.precio|currency}} Total:{{consulta.dias*vuelo.precio|currency}}</h2>
+                                            <h4 class="media-heading"><h2>Precio por dia:{{vuelo.precio|currency}} Total:{{vuelo.dias*vuelo.precio|currency}}</h2>
                                 </h4>
                                             <h4>Tipo habitación:{{vuelo.tipoHabitacion}}</h4>
                                             <h4>Descripción:</h4>
                                             <p>{{vuelo.descripcion}}</p>
 
-                                            <label for=""></label>
-                                            <button type="button" class="btn btn-primary form-control" ng-click="reservarVuelo(vuelo.idHabitacion)">Reservar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +97,7 @@
                             </div>
                         </div>
                         <div id="autos" ng-show="{{!autos}}" class="tab-pane fade">
-                            <div class="row" ng-repeat="vuelo in vuelos" style="margin-top=30px;">
+                            <div class="row" ng-repeat="vuelo in autos" style="margin-top=30px;">
 
                                 <div class='col-xs-12'>
                                     <div class="media">
@@ -112,7 +107,7 @@
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading"><h2>Precio por dia:{{vuelo.precio|currency}} Total:{{consulta.dias*vuelo.precio|currency}}</h2>
+                                            <h4 class="media-heading"><h2>Precio por dia:{{vuelo.precio|currency}} Total:{{vuelo.dias*vuelo.precio|currency}}</h2>
                                 </h4>
                                             <h4>Modelo:{{vuelo.modelo}}</h4>
                                             <h4>Puertas:{{vuelo.puertas}}</h4>
@@ -121,7 +116,6 @@
                                             <h4>Transmisión:{{vuelo.transmision}}</h4>
                                             <h4>Aire:{{vuelo.aire}}</h4>
                                             <label for=""></label>
-                                            <button type="button" class="btn btn-primary form-control" ng-click="reservarVuelo(vuelo.idAuto)">Reservar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -222,6 +216,7 @@
                 , function (response) {});
             this.serviceHabitaciones.query(
                 function (response) {
+                    console.log(response);
                     $scope.habitaciones = response;
 
                 }
@@ -229,6 +224,7 @@
 
             this.serviceVuelos.query(
                 function (response) {
+                    console.log(response);
                     $scope.vuelos = response;
 
                 }

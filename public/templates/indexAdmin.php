@@ -14,8 +14,8 @@
                                 </span>
                             </div>
                             <div class="col-md-8">
-                                <h2><a href="#">Administrar Aerolíneas</a></h2>
-                                <h2><a href="#">Administrar Vuelos</a></h2>
+                                <h2><a href="adminAerolinea.php">Administrar Aerolíneas</a></h2>
+                                <h2><a href="adminVuelo.php">Administrar Vuelos</a></h2>
                             </div>
                         </div>
                     </div>
@@ -34,15 +34,15 @@
                                 </span>
                             </div>
                             <div class="col-md-8">
-                                <h2><a href="#">Administrar Agencias de Autos</a></h2>
-                                <h2><a href="#">Administrar Autos</a></h2>
+                                <h2><a href="adminAgencia.php">Administrar Agencias de Autos</a></h2>
+                                <h2><a href="adminAuto.php">Administrar Autos</a></h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-         <div class="row">
+        <div class="row">
             <div class="col-md-11 col-md-offset-1">
                 <div class="jumbotron container-fluid pane">
                     <div class="container">
@@ -54,8 +54,8 @@
                                 </span>
                             </div>
                             <div class="col-md-8">
-                                <h2><a href="#">Administrar Hoteles</a></h2>
-                                <h2><a href="#">Administrar Habitaciones</a></h2>
+                                <h2><a href="adminHotel.php">Administrar Hoteles</a></h2>
+                                <h2><a href="adminHabitacion.php">Administrar Habitaciones</a></h2>
                             </div>
                         </div>
                     </div>
