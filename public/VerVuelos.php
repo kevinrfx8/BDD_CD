@@ -65,7 +65,7 @@
                             <select name="" class="form-control" id="" ng-options="item.id as item.nombre for item in aerolineas" ng-model="consulta.idAerolinea"></select>
                         </div>
                         <div class="col-xs-2 input-group-lg">
-                            <label for="">r</label>
+                            <label for=""></label>
                             <button type="button" class="btn btn-primary form-control" ng-click="cargarVuelos()">Buscar</button>
                         </div>
 
@@ -74,7 +74,7 @@
 
                 <br>
                 <br>
-                <div class="row" ng-repeat="vuelo in vuelos">
+                <div class="row" ng-repeat="vuelo in vuelos" style="margin-top=30px;">
 
                     <div class='col-xs-12'>
                         <div class="media">
@@ -89,18 +89,20 @@
                                 <h5>{{vuelo.horaSalida}}  {{vuelo.horaLlegada}}</h5>
                                 <h4>Costos:</h4>
                                 <h5>Primera Clase {{vuelo.cuotaPrimera|currency}}
-                                    <button type="button" class="btn btn-primary " ng-click="cargarVuelos()">Buscar</button>
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesPrimera>0" ng-click="reservarVuelo('disponiblesPrimera',vuelo.idVuelo)">Reservar en Primera Clase</button>
                                 </h5>
                                 <h5>Clase Ejecutiva {{vuelo.cuotaEjecutiva|currency}}
-                                    <button type="button" class="btn btn-primary " ng-click="cargarVuelos()">Buscar</button>
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesEjecutiva>0" ng-click="reservarVuelo('disponiblesEjecutiva',vuelo.idVuelo)">Reservar en Clase Ejecutiva</button>
                                 </h5>
                                 <h5>Clase Turista {{vuelo.cuotaTurista|currency}}
-                                    <button type="button" class="btn btn-primary " ng-click="cargarVuelos()">Buscar</button>
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesTurista>0" ng-click="reservarVuelo('disponiblesTurista',vuelo.idVuelo)">Reservar en Clase Turista</button>
                                 </h5>
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </div>
 
 
@@ -368,6 +370,13 @@
                     $scope.vuelos = response;
 
                 });
+            };
+            $scope.reservarVuelo = function (tipo, idVuelo) {
+                var reserva = {
+                    tipo: tipo
+                    , idVuelo: idVuelo
+                };
+
             };
         }]);
     </script>

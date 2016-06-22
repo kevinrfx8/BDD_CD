@@ -7,15 +7,6 @@ $connectionA=connect();
 $connectionB=connect2();
 $method = $_SERVER['REQUEST_METHOD'];
 switch($method){
-    case "GET":
-        
-        $array["a"]=1;
-        $array["b"]=2;
-        $array["c"]=3;
-        foreach($array as $key => $value){
-            echo $array[$key]." ".$key;
-        }
-        break;
     case "POST":
         $request=json_decode(file_get_contents('php://input'));
         
