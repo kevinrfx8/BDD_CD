@@ -17,10 +17,10 @@
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
-        <link rel="stylesheet" href="../bower_components/bootstrap/less/bootstrap.css">
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
 
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
-        <link rel="stylesheet" href="../bower_components/bootstrap/less/bootstrap.css">
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
 
         <link rel="stylesheet" href="../bower_components/jquery-ui/themes/dark-hive/jquery-ui.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
