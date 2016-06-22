@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Hojas de estilo-->
         <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" media="screen,projection" />
+        <link href="assets/css/full-slider.css" rel="stylesheet">
         <!--Scripts externos-->
         <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
@@ -76,7 +77,8 @@
         <div class="xycenter container" id="login">
             <font color="white">
                 <h1 id="titulo" class="text-center">Iniciar Sesión</h1>
-                <p class="text-center">Inicia sesión y comienza a viajar con nosotros ahora!</p>
+                <p class="text-center">Inicia sesión y comienza a viajar con nosotros ahora!
+                    <br>Si no tienes cuenta aún, regístrate <a href="register.php">aquí</a>.</p>
             </font>
             <form action="checkLogin.php" onsubmit="return checkData()" method="post" id="loginForm" name="loginForm">
                 <div class="row">
@@ -102,7 +104,11 @@
                 </div>
             </form>
         </div>
-        <a href="admLogin.php" class="empresas"><small>Administradores</small></a>
+        <footer class="footer">
+            <div class="container">
+                <a href="admLogin.php" class="text-muted text-centered">Haga clic aquí para iniciar sesión como administrador.</a>
+            </div>
+        </footer>
     </body>
 
     </html>

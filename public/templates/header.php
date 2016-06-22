@@ -36,13 +36,13 @@
                 </ul>
                 <?php } else{ ?><!--Si no esta logeado -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="registro.php">Registrarse</a></li>
+                    <li><a href="register.php">Registrarse</a></li>
                     <li><a href="login.php">Ingresar</a></li>
                 </ul>
                 <?php }?>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Buscar">
                     </div>
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                 </form>

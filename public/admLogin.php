@@ -60,7 +60,7 @@
             <font color="white">
                 <h1 id="titulo" class="text-center">Iniciar Sesión</h1>
                 <p class="text-center">Inicia sesión como administrador del sistema.
-                <br>Si eres cliente, inicia sesión <a href="#">aquí.</a></p>
+                <br>Si eres cliente, inicia sesión <a href="login.php">aquí.</a></p>
             </font>
             <form action="checkLogin.php" onsubmit="return checkData()" method="post" id="loginForm" name="loginForm">
                 <div class="row">
