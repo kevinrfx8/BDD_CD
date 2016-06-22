@@ -85,7 +85,7 @@
                     <div class="form-groupcol-sm-12 col-md-12 col-lg-5 center-block" style="float:none;">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-                            <input id="user" name="userID" type="text" class="form-control" placeholder="Nombre de usuario">
+                            <input id="user" name="userID" type="text" class="form-control" placeholder="Nombre de usuario" ng-model="consulta.nickname">
                         </div>
                     </div>
                 </div>
@@ -93,13 +93,13 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-5 center-block" style="float:none;">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
-                            <input id="pass" name="userPassword" type="password" class="form-control" placeholder="Contraseña">
+                            <input id="pass" name="userPassword" type="password" class="form-control" placeholder="Contraseña" ng-model="contraseña">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 center-block" style="float:none;">
-                        <input id="button" name="submit2" type="submit" class="btn btn-danger btn-block" value="Ingresar" />
+                        <input id="button" name="submit2" type="submit" class="btn btn-danger btn-block" value="Ingresar" ng-click="ingresar()" />
                     </div>
                 </div>
             </form>

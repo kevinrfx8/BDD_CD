@@ -51,6 +51,7 @@ switch($method){
         $query="INSERT INTO agencia (nombre,telefono,logoUrl,idDireccion) values('$nombre','$telefono','image.png','$idDireccion')";
         $result=$connectionA -> query($query);
         //echo $agencia->{'msg'};
+        
         $id=$connectionA->insert_id;
         
         $imagen= $aerolinea->{'imagen'};
