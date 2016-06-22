@@ -40,66 +40,63 @@
                     <h2>Ver Vuelos</h2>
                 </div>
 
-                <form class="" id="filtros">
+                <form class="formConsulta">
                     <div class="row">
                         <div class="col-xs-2 input-group-lg">
                             <span class="fa fa-calendar fa-3X" aria-hidden="true"></span>
                             <label>Fecha Salida</label>
-                            <input type="text" id="datepicker" class="form-control" placeholder="Seleccionar...">
+                            <input type="text" id="fechaSalida" class="form-control" placeholder="Seleccionar...">
 
                         </div>
                         <div class="col-xs-3 input-group-lg">
                             <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                            <label for="sel1">Edo Salida</label>
-                            <select class="form-control" id="sel1">
-                                <option>TE ODIO KEV</option>
+                            <label for="">Edo Origen</label>
+                            <select name="estadoOrigen" class="form-control" id="selectOrigen" ng-options="item.id as item.estado for item in estados" ng-model="consulta.idEstadoOrigen">
                             </select>
                         </div>
                         <div class="col-xs-3 input-group-lg">
                             <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                            <label for="sel1">Edo Llegada</label>
-                            <select class="form-control" id="sel1">
-                                <option>TE ODIO KEV</option>
-                            </select>
+                            <label for="">Edo Destino</label>
+                            <select name="estadoOrigen" class="form-control" id="selectDestino" ng-options="item.id as item.estado for item in estados" ng-model="consulta.idEstadoDestino"></select>
                         </div>
                         <div class="col-xs-2 input-group-lg">
-                            <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
-                            <label for="sel1">Aerolinea</label>
-                            <select class="form-control" id="sel1">
-                                <option>TE ODIO KEV</option>
-                            </select>
+                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                            <label for="">Aerolineas</label>
+                            <select name="" class="form-control" id="" ng-options="item.id as item.nombre for item in aerolineas" ng-model="consulta.idAerolinea"></select>
                         </div>
                         <div class="col-xs-2 input-group-lg">
-                            <label for=""></label>
-                            <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#modal" ng-click="limpiar()">Nuevo Vuelo</button>
+                            <label for="">r</label>
+                            <button type="button" class="btn btn-primary form-control" ng-click="cargarVuelos()">Buscar</button>
                         </div>
+
                     </div>
-
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#datetimepicker1').datetimepicker();
-                        });
-                    </script>
-
-
-                    <!-- Div con imagen y texto-->
-
-
                 </form>
 
                 <br>
                 <br>
-                <div class="row">
+                <div class="row" ng-repeat="vuelo in vuelos">
 
-                    <div class='col--12'>
+                    <div class='col-xs-12'>
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="img-rounded" src="https://inn.org/wp-content/uploads/2015/03/NerdAlertBannerSquare-140x140-140x140.png" alt="Generic placeholder image">
+                                    <img class="img-rounded" src="" width="300" height="300" ng-src="{{vuelo.imgUrl}}" alt="Generic placeholder image">
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading"><b>Aquí debería de ir algo :)</b></h4> NO TIENES IDEA DE CUANTO TE ODIO PINSHI PATO GAY :V
+                                <h4 class="media-heading"><h2>{{vuelo.estadoOrigen}}-{{vuelo.estadoDestino}}</h2>
+                                <h3>{{vuelo.fechaSalida}}  {{vuelo.fechaLlegada}}</h3>
+                                <h5>{{vuelo.horaSalida}}  {{vuelo.horaLlegada}}</h5>
+                                <h4>Costos:</h4>
+                                <h5>Primera Clase {{vuelo.cuotaPrimera|currency}}
+                                    <button type="button" class="btn btn-primary " ng-click="cargarVuelos()">Buscar</button>
+                                </h5>
+                                <h5>Clase Ejecutiva {{vuelo.cuotaEjecutiva|currency}}
+                                    <button type="button" class="btn btn-primary " ng-click="cargarVuelos()">Buscar</button>
+                                </h5>
+                                <h5>Clase Turista {{vuelo.cuotaTurista|currency}}
+                                    <button type="button" class="btn btn-primary " ng-click="cargarVuelos()">Buscar</button>
+                                </h5>
                             </div>
                         </div>
                     </div>
@@ -114,10 +111,19 @@
     <script src="../bower_components/angular-resource/angular-resource.min.js "></script>
     <script src="../bower_components/jquery/dist/jquery.min.js "></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/Toaster/jquery.toaster.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../bower_components/timerpicker/jquery.timepicker.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#fechaSalida").datepicker();
+        });
+    </script>
     <script>
         var app = angular.module('app', ['ngResource']);
         //app.constant('baseURL', 'http://localhost:3000/');
-        app.constant('baseURL', 'http://localhost:8080/AgenciaVacacional4/public/api/');
+        app.constant('baseURL', 'http://localhost:8080/BDD_CD/public/api/');
         app.directive("fileread", [function () {
             return {
                 scope: {
@@ -138,6 +144,31 @@
         }]);
         app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
             this.getInfo = function () {
+                return $resource(baseURL + 'revervaVuelos.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+            this.getVuelos = function () {
+                return $resource(baseURL + 'buscarVuelos.php', null, {
+                    'consult': {
+                        method: 'POST'
+                        , isArray: true
+                    }
+                    , 'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+            this.getEstados = function () {
+                return $resource(baseURL + 'estados.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+            this.getAerolineas = function () {
                 return $resource(baseURL + 'aerolineas.php', null, {
                     'update': {
                         method: 'PUT'
@@ -147,101 +178,198 @@
         }]);
 
         app.controller('controller', ['$scope', 'factory', function ($scope, factory) {
+            $scope.cargando = false;
+            $scope.error = false;
             $scope.seleccionado = "";
             $scope.bandNuevo = false;
-            $scope.nuevo = {
-                id: ""
-                , nombre: ""
-                , telefono: ""
-                , sitioWeb: ""
-                , imagen: ""
-                , imgUrl: ""
-            }
+            $scope.vuelos = [];
+            $scope.aerolineas = [{
+                nombre: "Todas"
+                , id: ""
+                }];
+            $scope.estados = [{
+                    estado: "Todos"
+                    , id: ""
+                }
+                ]
+            $scope.consulta = {
+                fechaSalida: ""
+                , idEstadoOrigen: ""
+                , idEstadoDestino: ""
+                , idAerolinea: ""
+            };
             var controller = this;
             $scope.titulo = true;
-            $scope.aerolineas = [];
-            this.service = factory.getInfo();
-            //traer todos los registros
-            this.service.query(
-                function (response) {
-                    $scope.aerolineas = response;
-                    //console.log("res" + response);
+            $scope.lista = [];
+            this.service = factory.getInfo(); //get autos
+            this.serviceVuelos = factory.getVuelos();
+            this.serviceEstados = factory.getEstados();
+            this.serviceAerolineas = factory.getAerolineas();
+            /*----------------------------------Cargar Vuelos----------------------------------*/
+            $scope.cargarVuelos = function () {
+                console.log($scope.consulta);
+                /*controller.serviceVuelos.save($scope.consulta).$promise.then(function (response) {
+                    console.log(response);
+                    $scope.vuelos = response;
+                }, function (response) {
+                    console.log(response);
+                });*/
+            };
+            /*--------------------------------Cargar Registros de inicio-------------------------*/
+            this.serviceEstados.query(function (response) {
+                //$scope.estados = response;
 
-                }
-                , function (response) {
-                    //console.log("err" + response);
-                });
-            //eliminar
+                $scope.estados = $scope.estados.concat(response);
+            });
+            this.serviceAerolineas.query(function (response) {
+                $scope.aerolineas = $scope.aerolineas.concat(response);
+            });
+
+            /*-----------------------------Eliminar---------------------------------------------*/
             $scope.eliminar = function (index) {
                 controller.service.delete({
-                        id: $scope.aerolineas[index].id
+                        id: $scope.lista[index].idVuelo
                     }, function (response) {
-                        $scope.aerolineas.splice(index, 1);
+                        $scope.lista.splice(index, 1);
+                        $.toaster({
+                            priority: 'success'
+                            , title: 'Exito'
+                            , message: 'Registro eliminado'
+                        });
+
 
                     }
                     , function (response) {
+                        $.toaster({
+                            priority: 'danger'
+                            , title: 'Error'
+                            , message: 'No se pudo eliminar el registro'
+                        });
+
 
                     });
 
             };
-            //modificar
+            /*------------------------------------Modificar------------------------------------*/
             $scope.modificar = function (index) {
+                $scope.nuevo.horaSalida = $("#timepicker1").val();
+                $scope.nuevo.horaLlegada = $("#timepicker2").val();
+
+                $scope.nuevo.fechaSalida = $("#datepicker").val();
+                $scope.nuevo.fechaLlegada = $("#datepicker2").val();
+                $scope.nuevo.estadoOrigen = $('#selectOrigen option:selected').text();
+                $scope.nuevo.estadoDestino = $('#selectDestino option:selected').text();
                 console.log($scope.nuevo);
+                $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
+
                 controller.service.update({
-                        id: $scope.nuevo.id
+                        id: $scope.nuevo.idAuto
                     }, $scope.nuevo, function (response) {
                         console.log(response);
-                        $scope.aerolineas.splice($scope.seleccionado, 1);
-                        $scope.aerolineas.push(response);
+                        $scope.lista.splice($scope.seleccionado, 1);
+                        $scope.lista.push(response);
+                        $.toaster({
+                            priority: 'success'
+                            , title: 'Exito'
+                            , message: 'Registro modificado'
+                        });
 
 
-
-                        //$scope.aerolineas.splice(index, 1);
+                        //$scope.lista.splice(index, 1);
 
                     }
                     , function (response) {
-
+                        $.toaster({
+                            priority: 'danger'
+                            , title: 'Error'
+                            , message: 'No se pudo modificar el registro'
+                        });
                     });
 
                 console.log(index);
             };
-            //nuevo
+            //-------------------------Insertar------------------------------------//
             $scope.insertar = function () {
+                $scope.nuevo.horaSalida = $("#timepicker1").val();
+                $scope.nuevo.horaLlegada = $("#timepicker2").val();
+                $scope.nuevo.fechaSalida = $("#datepicker").val();
+                $scope.nuevo.fechaLlegada = $("#datepicker2").val();
+                $scope.nuevo.estadoOrigen = $('#selectOrigen option:selected').text();
+                $scope.nuevo.estadoDestino = $('#selectDestino option:selected').text();
+
+                $scope.nuevo.idAerolinea = $scope.aerolinea;
+                $scope.nuevo.descripcion = $('#selectTipo option:selected').text();
                 $scope.nuevo.imagenNombre = $('input[type=file]').val().split('\\').pop();
                 console.log($scope.nuevo);
-                controller.service.save($scope.nuevo, function (response) {
+                controller.service.save($scope.nuevo).$promise.then(function (response) {
                     console.log(response);
-                    $scope.aerolineas.push(response);
+
+
+                    $scope.lista.push(response);
+                    $.toaster({
+                        priority: 'success'
+                        , title: 'Exito'
+                        , message: 'Registro insertado'
+                    });
+                }, function (response) {
+                    console.log(response);
+
+                    $.toaster({
+                        priority: 'danger'
+                        , title: 'Error'
+                        , message: 'No se pudo insertar el registro'
+                    });
                 });
             };
+            /*-----------------------------Limpiar-----------------------------------*/
             $scope.limpiar = function () {
+
+                console.log($scope.agencia);
+                //$scope.municipios = [];
+                angular.forEach($scope.form, function (input) {
+                    if (input && input.hasOwnProperty('$viewValue')) {
+                        input.$setUntouched();
+                    }
+                });
                 $scope.bandNuevo = true;
-                $scope.nuevo = {
+                $scope.nuevo = {};
+                /*$scope.nuevo = {
                     id: ""
                     , nombre: ""
                     , telefono: ""
-                    , sitioWeb: ""
                     , imagen: ""
                     , imgUrl: ""
-                }
+                    , estdo: ""
+                    , municipio: ""
+                    , calle: ""
+                    , numero: ""
+                    , codigopostal: ""
+                    , idEstado: ""
+                    , idMunicipio: ""
+                };*/
+                $("#subirArchivo").val("");
+                $("#upload-file-info").text("");
             };
-            $scope.verAerolinea = function (aerolinea, index) {
+            /*--------------------------------Ver en modal---------------------------*/
+            $scope.verItem = function (item, index) {
+                //$scope.actualizarMunicipios();
+
                 $scope.bandNuevo = false;
-                $scope.nuevo = angular.copy(aerolinea);
+                $scope.nuevo = angular.copy(item);
                 $scope.nuevo.imagen = "";
                 $scope.seleccionado = index;
+
             };
-                    }]);
-    </script>
-    <script src="../bower_components/angular/angular.min.js "></script>
-    <script src="../bower_components/angular-resource/angular-resource.min.js "></script>
-    <script src="../bower_components/jquery/dist/jquery.min.js "></script>
-    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
+            $scope.cargarVuelos = function () {
+                $scope.consulta.fechaSalida = $("#fechaSalida").val();
+                console.log($scope.consulta);
+                controller.serviceVuelos.consult($scope.consulta).$promise.then(function (response) {
+                    console.log(response);
+                    $scope.vuelos = response;
+
+                });
+            };
+        }]);
     </script>
 
     </html>
