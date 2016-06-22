@@ -136,22 +136,22 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-4">
                                             <label for="">Tipo Habitación:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
+                                                <span class="input-group-addon"><i class="fa fa-bed fa-fw"></i></span>
                                                 <select name="tipo" class="form-control" id="selectTipo" ng-options="item.idTipoHabitacion as item.tipoHabitacion for item in tipos" ng-model="nuevo.idTipoHabitacion" required>
                                                 </select>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Seleccione alguna opción
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
                                             <label for="">Precio:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="precio" id="modalPrecio" type="text" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
+                                                <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
+                                                <input name="precio" id="modalPrecio" type="number"  step="0.01" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.precio.$touched && form.precio.$invalid}">
+                                                <strong>Atención!</strong> Enteros y Decimales solamente
                                             </div>
                                         </div>
                                     </div>
@@ -159,11 +159,11 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-12">
                                             <label for="">Descripción:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="modalDescripcion" name="descripcion" type="text" class="form-control" ng-model="nuevo.descripcion" placeholder="Descripción" required>
+                                                <span class="input-group-addon"><i class="fa fa-file-text-o fa-fw"></i></span>
+                                                <input id="modalDescripcion" name="descripcion" type="text" class="form-control" pattern="[A-Za-z0-9. ]{10,40}" ng-model="nuevo.descripcion" placeholder="Descripción" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.descripcion.$touched && form.descripcion.$invalid}">
+                                                <strong>Atención!</strong> Alfanuméricos con 10 caracteres mínimo y máximo 40
                                             </div>
                                         </div>
                                     </div>

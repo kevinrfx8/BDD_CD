@@ -1,47 +1,38 @@
-<!DOCTYPE html>
-<html lang="es">
+<?php
+	session_start();
+?>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html>
 
-    <!-- Bootstrap -->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <head>
+        <!--Tipo de contenido y lenguaje-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="es-mx" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Hojas de estilo-->
+        <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" media="screen,projection" />
+        <link href="assets/css/full-slider.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <!--Scripts externos-->
+        <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    </head>
 
-    <link rel="stylesheet" href="../bower_components/Materialize/dist/css/materialize.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body>
-    <?php require('templates/header.php');?>
+    <body>
+        <?php require('templates/header.php');
+        if((isset($_SESSION['id']) && $_SESSION['tipo']==1)){//logeado y administrador
+            require('templates/indexAdmin.php');
+        }
+        else{
+            require('templates/indexUser.php');
+        }
+            require('templates/footer.php');
+        ?>
 
 
-        <main>
-            <?php 
-    
-                if(isset($_SESSION['id'])&& $_SESSION['tipo']==0)
-                    //es un usuario
-                    require('templates/indexAdmin.php');
 
-                else
-                    require('templates/indexUser.php');
+    </body>
 
-            ?>
-        </main>
-
-        <?php require('templates/footer.php');?>
-</body>
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../bower_components/Materialize/dist/js/materialize.js"></script>
-<script src="assets/javascript/javascript.js"></script>
-
-</html>
+    </html>

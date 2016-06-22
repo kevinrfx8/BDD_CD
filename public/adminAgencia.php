@@ -111,7 +111,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     <div class="modal-content ">
                         <!-- modal header-->
                         <div class="modal-header">
-                            <h2>{{bandNuevo ? 'Hotel Nuevo ':'Modificar Hotel '}}</h2>
+                            <h2>{{bandNuevo ? 'Nueva Agencia ':'Modificar Agencia '}}</h2>
                         </div>
                         <!-- modal body -->
                         <div class="modal-body">
@@ -123,20 +123,20 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Nombre:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="modalNombre" name="nombre" type="text" class="form-control" ng-model="nuevo.nombre" placeholder="Nombre" required>
+                                                <input id="modalNombre" name="nombre" type="text" class="form-control" pattern="[A-Za-z ]{5,20}" ng-model="nuevo.nombre" placeholder="Nombre" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Letras solamente con 5 caracteres mínimo y máximo 20
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="">Teléfono:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="telefono" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.telefono" placeholder="Teléfono" required>
+                                                <input name="telefono" id="modalTelefono" type="text" class="form-control" pattern="[0-9]{10}" ng-model="nuevo.telefono" placeholder="Teléfono" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Numérico solamente con 10 digitos incuyendo LADA
                                             </div>
                                         </div>
                                     </div>
@@ -149,18 +149,18 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                                 </select>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.estado.$touched && form.estado.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Seleccione alguna opción
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="">Municipio:</label>
                                             <div class="input-group input-group-lg ">
-                                                <select name="municipio" class="form-control col-xs-6" id="selectMunicipio" ng-options="item.id as item.municipio for item in municipios" ng-model="nuevo.idMunicipio" required>
+                                                <select name="municipio" class="form-control col-xs-6" id="selectMunicipio"  ng-options="item.id as item.municipio for item in municipios" ng-model="nuevo.idMunicipio" required>
 
                                                 </select>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.municipio.$touched && form.municipio.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Seleccione alguna opción
                                             </div>
                                         </div>
                                     </div>
@@ -168,21 +168,21 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-6">
                                             <label for="">Calle:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
-                                                <input id="modalNombre" name="calle" type="text" class="form-control " ng-model="nuevo.calle" placeholder="Calle" required>
+                                                <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
+                                                <input id="modalNombre" name="calle" type="text" class="form-control " pattern="[A-Za-z ]{8,30}" ng-model="nuevo.calle" placeholder="Calle" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.calle.$touched && form.calle.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Letras solamente con 8 caracteres mínimo y máximo 30
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="">Número:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="numero" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.numero" placeholder="Número" required>
+                                                <span class="input-group-addon"><i class="fa fa-hashtag fa-fw"></i></span>
+                                                <input name="numero" id="modalTelefono" type="text" class="form-control" pattern="[0-9]{2,4}" ng-model="nuevo.numero" placeholder="Número" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.numero.$touched && form.numero.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Numérico solamente con 2 caracteres mínimo y máximo 4
                                             </div>
                                         </div>
                                     </div>
@@ -190,11 +190,11 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-6">
                                             <label for="">Código Postal:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
-                                                <input id="modalNombre" name="codigopostal" type="text" class="form-control" ng-model="nuevo.codigopostal" placeholder="Código Postal" required>
+                                                <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                                                <input id="modalNombre" name="codigopostal" type="text" class="form-control" pattern="[0-9]{5}" ng-model="nuevo.codigopostal" placeholder="Código Postal" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.codigopostal.$touched && form.codigopostal.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                                <strong>Atención!</strong> Numérico solamente con 5 caracteres
                                             </div>
                                         </div>
                                     </div>

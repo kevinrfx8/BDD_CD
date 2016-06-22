@@ -116,25 +116,25 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <form class="" id="formAerolinea" name="formAerolinea">
                                     <div class="row">
                                         <div class="input-group margin-bottom-sm" id="nuevoNombre">
-                                            <span class="input-group-addon"><i class="fa fa-plane fa-fw"></i></span>
-                                            <input id="modalNombre" name="nombre" type="text" class="form-control" ng-model="nuevo.nombre" placeholder="Nombre" required>
+                                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                                            <input id="modalNombre" name="nombre" type="text" class="form-control" pattern="[A-Za-z ]{5,20}" ng-model="nuevo.nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.nombre.$touched && formAerolinea.nombre.$invalid}">
-                                            <strong>Atención!</strong> Es requerido
+                                            <strong>Atención!</strong> Letras solamente con 5 caracteres mínimo y máximo 20
                                         </div>
                                         <div class="input-group margin-bottom-sm " id="nuevoNombre">
                                             <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                            <input name="telefono" id="modalTelefono" type="text" class="form-control" ng-model="nuevo.telefono" placeholder="Teléfono" required>
+                                            <input name="telefono" id="modalTelefono" type="text" class="form-control" pattern="[0-9]{10}" ng-model="nuevo.telefono" placeholder="Teléfono" required>
                                         </div>
                                         <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.telefono.$touched && formAerolinea.telefono.$invalid}">
-                                            <strong>Atención!</strong> Es requerido
+                                            <strong>Atención!</strong> Numérico solamente con 10 digitos incuyendo LADA
                                         </div>
                                         <div class="input-group margin-bottom-sm " id="nuevoNombre">
                                             <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
-                                            <input name="sitio" id="modalSitio" type="text" class="form-control" ng-model="nuevo.sitioWeb" placeholder="Sitio Web" required>
+                                            <input name="sitio" id="modalSitio" type="text" class="form-control" pattern="[.A-Za-z0-9-_ ]{10,35}" ng-model="nuevo.sitioWeb" placeholder="Sitio Web" required>
                                         </div>
                                         <div class="alert alert-warning oculto" ng-class="{'visible':formAerolinea.sitio.$touched && formAerolinea.sitio.$invalid}">
-                                            <strong>Atención!</strong> Es requerido
+                                            <strong>Atención!</strong> Letras, números y (.-_) con 10 caracteres mínimo y máximo 35 
                                         </div>
                                         <label class="btn btn-primary btn-file">
                                             <input id="subirArchivo" type="file" fileread="nuevo.imagen" ng-model="nuevo.imagenNombre" name="nuevoNombreImagen" style="display: none;" onchange="$('#upload-file-info').html($(this).val());">

@@ -60,7 +60,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <div class="col-xs-2">
                                     <div class="input-group-lg">
                                         <label for=""> </label>
-                                        <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#modal" ng-click="limpiar()">Nuevo Auto</button>
+                                        <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#modal" ng-click="limpiar()">Nuevo Vuelo</button>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <label for="">Fecha Salida:</label>
-                                            <i class="fa fa-home fa-fw"></i>
+                                            <i class="fa fa-calendar fa-fw"></i>
                                             <input name="fechaSalida" type="text" id="datepicker" class="form-control" ng-model="nuevo.fechaSalida" placeholder="Fecha Salida">
 
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
@@ -146,7 +146,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="">Fecha Llegada:</label>
-                                            <i class="fa fa-home fa-fw"></i>
+                                            <i class="fa fa-calendar fa-fw"></i>
                                             <input name="fechaLlegada" type="text" id="datepicker2" class="form-control" ng-model="nuevo.fechaLlegada" placeholder="Fecha Llegada">
 
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
@@ -158,34 +158,35 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-6">
                                             <label for="">Estado Origen:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <select name="estadoOrigen" class="form-control" id="selectOrigen" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstadoOrigen">
+                                                <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
+                                                <select name="estadoOrigen" class="form-control" id="selectOrigen" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstadoOrigen" required>
                                                 </select>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.estadoOrigen.$touched && form.estadoOrigen.$invalid}">
+                                                <strong>Atención!</strong> Seleccione una opción
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <label for="">Estado Destino:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <select name="estadoDestino" class="form-control" id="selectDestino" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstadoDestino">
+                                                <span class="input-group-addon"><i class="fa fa-globe fa-fw"></i></span>
+                                                <select name="estadoDestino" class="form-control" id="selectDestino" ng-options="item.id as item.estado for item in estados" ng-model="nuevo.idEstadoDestino" requiered>
                                                 </select>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.estadoDestino.$touched && form.estadoDestino.$invalid}">
+                                                <strong>Atención!</strong> Seleccione una opción
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <label for="">Hora Salida:</label>
-                                            <i class="fa fa-home fa-fw"></i>
+                                            <div class="input-group margin-bottom-sm ">
+                                                <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
                                             <input id="timepicker1" name="horaSalida" type="text" class="form-control" ng-model="nuevo.horaSalida" placeholder="Hora Salida">
-
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            </div>
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.horaSalida.$touched && form.horaSalida.$invalid}">
+                                                <strong>Atención!</strong> Seleccione una opción
                                             </div>
 
 
@@ -193,11 +194,11 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-6">
                                             <label for="">Hora Llegada:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                                                <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
                                                 <input id="timepicker2" name="horaLlegada" type="text" class="form-control" ng-model="nuevo.horaLlegada" placeholder="Hora Llegada">
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.horaLlegada.touched && form.horaLlegada.$invalid}">
+                                                <strong>Atención!</strong> Seleccione una opción
                                             </div>
                                         </div>
                                     </div>
@@ -205,31 +206,31 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-4">
                                             <label for="">Asientos Primera Clase:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="timepicker2" name="disponiblesPrimera" type="text" class="form-control" ng-model="nuevo.disponiblesPrimera" placeholder="Asientos Primera Clase" required>
+                                                <span class="input-group-addon"><i class="fa fa-linux fa-fw"></i></span>
+                                                <input id="timepicker2" name="disponiblesPrimera" type="number" min="0" max="150" class="form-control" ng-model="nuevo.disponiblesPrimera" placeholder="Asientos Primera Clase" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.disponiblesPrimera.$touched && form.disponiblesPrimera.$invalid}">
+                                                <strong>Atención!</strong> Numérico solamente valores entre 0 y 150
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
                                             <label for="">Asientos Clase Ejecutiva:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="disponiblesEjecutiva" type="text" class="form-control" ng-model="nuevo.disponiblesEjecutiva" placeholder="Asientos Clase Ejecutiva" required>
+                                                <span class="input-group-addon"><i class="fa fa-linux fa-fw"></i></span>
+                                                <input name="disponiblesEjecutiva" type="number" class="form-control" min="0" max="150" ng-model="nuevo.disponiblesEjecutiva" placeholder="Asientos Clase Ejecutiva" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.disponiblesEjecutiva.$touched && form.disponiblesEjecutiva.$invalid}">
+                                                <strong>Atención!</strong> Numérico solamente valores entre 0 y 150
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
                                             <label for="">Asientos Clase Turista:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="disponiblesTurista" type="text" class="form-control" ng-model="nuevo.disponiblesTurista" placeholder="Asientos Clase Turista" required>
+                                                <span class="input-group-addon"><i class="fa fa-linux fa-fw"></i></span>
+                                                <input name="disponiblesTurista" type="number" min="0" max="150" class="form-control" ng-model="nuevo.disponiblesTurista" placeholder="Asientos Clase Turista" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.disponiblesTurista.$touched && form.disponiblesTurista.$invalid}">
+                                                <strong>Atención!</strong> Numérico solamente valores entre 0 y 150
                                             </div>
                                         </div>
                                     </div>
@@ -237,31 +238,31 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                         <div class="col-xs-4">
                                             <label for="">Costo Primera Clase:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input name="costoPrimera" type="text" class="form-control" ng-model="nuevo.cuotaPrimera" placeholder="Costos Primera Clase" required>
+                                                <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
+                                                <input name="costoPrimera" type="number" class="form-control" step="0.01" ng-model="nuevo.cuotaPrimera" placeholder="Costos Primera Clase" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.costoPrimera.$touched && form.costoPrimera.$invalid}">
+                                                <strong>Atención!</strong> Numérico y Decimales solamente 
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
                                             <label for="">Costo Clase Ejecutiva:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="costoEjecutiva" type="text" class="form-control" ng-model="nuevo.cuotaEjecutiva" placeholder="Costo Clase Ejecutiva" required>
+                                                <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
+                                                <input name="costoEjecutiva" type="number" class="form-control" step="0.01" ng-model="nuevo.cuotaEjecutiva" placeholder="Costo Clase Ejecutiva" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.costoEjecutiva.$touched && form.costoEjecutiva.$invalid}">
+                                                <strong>Atención!</strong> Numérico y Decimales solamente 
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
                                             <label for="">Costo Clase Turista:</label>
                                             <div class="input-group margin-bottom-sm ">
-                                                <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                                                <input name="costoTurista" type="text" class="form-control" ng-model="nuevo.cuotaTurista" placeholder="Costo Clase Turista" required>
+                                                <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
+                                                <input name="costoTurista" type="number" class="form-control" step="0.01" ng-model="nuevo.cuotaTurista" placeholder="Costo Clase Turista" required>
                                             </div>
-                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.telefono.$touched && form.telefono.$invalid}">
-                                                <strong>Atención!</strong> Es requerido
+                                            <div class="alert alert-warning oculto" ng-class="{'visible':form.costoTurista.$touched && form.costoTurista.$invalid}">
+                                                <strong>Atención!</strong> Numérico y Decimales solamente 
                                             </div>
                                         </div>
                                     </div>
