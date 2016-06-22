@@ -14,7 +14,7 @@ switch($method){
         $idHabitacion=$request->{'idHabitacion'};
         $fecha=$request->{'fecha'};
         $dias=$request->{'dias'};
-        $idUsuario=1;//lo sacará de la sesión
+        $idUsuario=$_SESSION['id'];
 
         $query="INSERT INTO reservaHabitacion (idHabitacion,idUsuario,fecha,dias) VALUES($idHabitacion,$idUsuario,STR_TO_DATE('$fecha', '%m/%d/%Y'),$dias)";
         $result=$connectionA -> query($query);

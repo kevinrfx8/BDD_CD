@@ -25,6 +25,7 @@ switch($method){
             $respuesta=array("estado"=>true);
             $_SESSION['id']=$row['idUsuario'];
             $_SESSION['tipo']=1;
+            $_SESSION['nickname']=$row['nickname'];
         }
         echo json_encode($respuesta);
         break;

@@ -137,7 +137,8 @@
             };
         }]);
         app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
-            this.getInfo = function () { return $resource(baseURL + 'checkUser.php', null, {
+            this.getInfo = function () {
+                return $resource(baseURL + 'checkUser.php', null, {
                     'update': {
                         method: 'PUT'
                     }
@@ -158,8 +159,14 @@
                 controller.service.save($scope.consulta).$promise.then(function (response) {
 
                     console.log(response);
-                    if(response.estado){
-                        
+                    if (response.estado) {
+                        location.href = "index.php";
+                    } else {
+                        $.toaster({
+                            priority: 'warning'
+                            , title: 'Error'
+                            , message: 'Credenciales no validas'
+                        });
                     }
 
                 });

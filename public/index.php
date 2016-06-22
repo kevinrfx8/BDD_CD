@@ -21,7 +21,7 @@
 
     <body>
         <?php require('templates/header.php');
-        if((isset($_SESSION['id']) && $_SESSION['tipo']==1)){//logeado y administrador
+        if((isset($_SESSION['id']) && $_SESSION['tipo']==0)){//logeado y administrador
             require('templates/indexAdmin.php');
         }
         else{
