@@ -111,7 +111,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                     <div class="modal-content ">
                         <!-- modal header-->
                         <div class="modal-header">
-                            <h2>{{bandNuevo ? 'Hotel Nuevo ':'Modificar Hotel '}}</h2>
+                            <h2>{{bandNuevo ? 'Nueva Agencia ':'Modificar Agencia '}}</h2>
                         </div>
                         <!-- modal body -->
                         <div class="modal-body">
@@ -123,7 +123,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Nombre:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
-                                                <input id="modalNombre" name="nombre" type="text" class="form-control" pattern="[A-Za-z ]" ng-model="nuevo.nombre" placeholder="Nombre" required>
+                                                <input id="modalNombre" name="nombre" type="text" class="form-control" pattern="[A-Za-z ]{5,20}" ng-model="nuevo.nombre" placeholder="Nombre" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.nombre.$touched && form.nombre.$invalid}">
                                                 <strong>Atención!</strong> Letras solamente con 5 caracteres mínimo y máximo 20
