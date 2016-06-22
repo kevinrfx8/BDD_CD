@@ -15,7 +15,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap 101 Template</title>
+        <title>Administración Habitaciones</title>
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
@@ -43,7 +43,8 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="input-group-lg">
-                                        <label for="">Hotele:</label>
+                                        <span class="fa fa-building fa-2x "></span>
+                                        <label for="">Hotel:</label>
                                         <select name="agencias" class="form-control" id="selectAgencia" ng-options="item.id as item.nombre for item in hoteles" ng-model="hotel" ng-change="getHabitaciones()" required>
                                         </select>
                                     </div>
@@ -51,7 +52,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                 <div class="col-xs-6">
 
                                     <div class="input-group-lg">
-                                        <span class="fa fa-home fa-2x "></span>
+                                        <span class="fa fa-search fa-2x "></span>
                                         <input id="icon_prefix" type="text" class="form-control" ng-model="filtro" placeholder="Buscar">
                                     </div>
                                 </div>
@@ -148,7 +149,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                                             <label for="">Precio:</label>
                                             <div class="input-group margin-bottom-sm ">
                                                 <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
-                                                <input name="precio" id="modalPrecio" type="number"  step="0.01" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
+                                                <input name="precio" id="modalPrecio" type="text" step="0.01" class="form-control" ng-model="nuevo.precio" placeholder="Precio" required>
                                             </div>
                                             <div class="alert alert-warning oculto" ng-class="{'visible':form.precio.$touched && form.precio.$invalid}">
                                                 <strong>Atención!</strong> Enteros y Decimales solamente

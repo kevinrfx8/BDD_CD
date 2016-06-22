@@ -15,7 +15,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap 101 Template</title>
+        <title>Administración de Hoteles</title>
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="../bower_components/components-font-awesome/less/font-awesome.css">
@@ -42,7 +42,7 @@ if(!isset(SESSION['tipo'])&&SESSION['tipo']!=0){
                         <form class="col s12" id="filtros">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <span class="fa fa-home fa-2x "></span>
+                                    <span class="fa fa-building fa-2x "></span>
                                     <input id="icon_prefix" type="text" class="gcol-md-10" ng-model="filtro" placeholder="Buscar">
                                 </div>
                                 <div class="input-field col-md-2">
