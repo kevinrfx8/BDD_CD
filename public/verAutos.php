@@ -52,7 +52,7 @@
                         <div class="col-xs-2 input-group-lg">
                             <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
                             <label for="">Dias</label>
-                            <input type="text" class="form-control" placeholder="Seleccionar..." ng-model="consulta.dias">
+                            <input type="text" class="form-control" id="dias" placeholder="Seleccionar..." ng-model="consulta.dias">
                         </div>
                         <div class="col-xs-3 input-group-lg">
                             <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
@@ -85,19 +85,16 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading"><h2>{{vuelo.estadoOrigen}}-{{vuelo.estadoDestino}}</h2>
-                                <h3>{{vuelo.fechaSalida}}  {{vuelo.fechaLlegada}}</h3>
-                                <h5>{{vuelo.horaSalida}}  {{vuelo.horaLlegada}}</h5>
-                                <h4>Costos:</h4>
-                                <h5>Primera Clase {{vuelo.cuotaPrimera|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesPrimera>0" ng-click="reservarVuelo('disponiblesPrimera',vuelo.idVuelo,vuelo)">Reservar en Primera Clase</button>
-                                </h5>
-                                <h5>Clase Ejecutiva {{vuelo.cuotaEjecutiva|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesEjecutiva>0" ng-click="reservarVuelo('disponiblesEjecutiva',vuelo.idVuelo,vuelo)">Reservar en Clase Ejecutiva</button>
-                                </h5>
-                                <h5>Clase Turista {{vuelo.cuotaTurista|currency}}
-                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesTurista>0" ng-click="reservarVuelo('disponiblesTurista',vuelo.idVuelo,vuelo)">Reservar en Clase Turista</button>
-                                </h5>
+                                <h4 class="media-heading"><h2>Precio por dia:{{vuelo.precio|currency}} Total:{{consulta.dias*vuelo.precio|currency}}</h2>
+                                </h4>
+                                <h4>Modelo:{{vuelo.modelo}}</h4>
+                                <h4>Puertas:{{vuelo.puertas}}</h4>
+                                <h4>Asientos:{{vuelo.asientos}}</h4>
+                                <h4>Cajuela:{{vuelo.cajuela}}</h4>
+                                <h4>Transmisión:{{vuelo.transmision}}</h4>
+                                <h4>Aire:{{vuelo.aire}}</h4>
+                                <label for=""></label>
+                                <button type="button" class="btn btn-primary form-control" ng-click="reservarVuelo(vuelo.idAuto)">Reservar</button>
                             </div>
                         </div>
                     </div>
@@ -147,7 +144,7 @@
         }]);
         app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
             this.getInfo = function () {
-                return $resource(baseURL + 'reservarVuelos.php', null, {
+                return $resource(baseURL + 'reservarAutos.php', null, {
                     'update': {
                         method: 'PUT'
                     }
@@ -392,15 +389,17 @@
                     }
                     , function (response) {});
             };
-            $scope.reservarVuelo = function (tipo, idVuelo, vuelo) {
+            $scope.reservarVuelo = function (idVuelo) {
 
                 var reserva = {
-                    tipo: tipo
-                    , idVuelo: idVuelo
+                    idAuto: idVuelo
+                    , fecha: $("#fechaSalida").val()
+                    , dias: $("#dias").val()
+
                 };
                 console.log(reserva);
                 controller.service.save(reserva).$promise.then(function (response) {
-                    vuelo[tipo] -= 1;
+
                     console.log(response);
                     $.toaster({
                         priority: 'success'

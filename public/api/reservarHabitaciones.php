@@ -11,17 +11,15 @@ switch($method){
         $request=json_decode(file_get_contents('php://input'));
         
         
-        $tipo=$request->{'tipo'};
-        $idVuelo=$request->{'idVuelo'};
+        $idHabitacion=$request->{'idHabitacion'};
+        $fecha=$request->{'fecha'};
+        $dias=$request->{'dias'};
         $idUsuario=1;//lo sacará de la sesión
 
-        $query="INSERT INTO reservaVuelo (idVuelo,idUsuario) VALUES($idVuelo,$idUsuario)";
+        $query="INSERT INTO reservaHabitacion (idHabitacion,idUsuario,fecha,dias) VALUES($idHabitacion,$idUsuario,STR_TO_DATE('$fecha', '%m/%d/%Y'),$dias)";
         $result=$connectionA -> query($query);
         
-        
-        
-        $query="UPDATE vueloB SET $tipo=$tipo-1 WHERE idVuelo=$idVuelo";
-        $result=$connectionB -> query($query);
+    
         echo json_encode($request);
         break;
 }
