@@ -15,12 +15,9 @@
         <link href="assets/css/home.css" rel="stylesheet">
         <link href="../bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet">
         <!--Scripts externos-->
-        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
-        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="../bower_components/angular/angular.js"></script>
     </head>
 
-    <body ng-app="">
+    <body ng-app="app" ng-controller="controller">
         <?php require('templates/header.php'); ?>
             <div class="container">
 
@@ -49,45 +46,86 @@
 
                     <div class="tab-content">
                         <div id="vuelos" ng-show="{{!vuelos}}" class="tab-pane fade in active">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <span class="fa-stack fa-3x">
-                                        <i class="fa fa-square-o fa-stack-2x"></i>
-                                        <i class="fa fa-plane fa-stack-1x"></i>
-                                    </span>
+                            <div class="row" ng-repeat="vuelo in vuelos" style="margin-top=30px;">
+
+                                <div class='col-xs-12'>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="img-rounded" src="" width="300" height="300" ng-src="{{vuelo.imgUrl}}" alt="Generic placeholder image">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><h2>{{vuelo.estadoOrigen}}-{{vuelo.estadoDestino}}</h2>
+                                <h3>{{vuelo.fechaSalida}}  {{vuelo.fechaLlegada}}</h3>
+                                <h5>{{vuelo.horaSalida}}  {{vuelo.horaLlegada}}</h5>
+                                <h4>Costos:</h4>
+                                            <h5>Primera Clase {{vuelo.cuotaPrimera|currency}}
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesPrimera>0" ng-click="reservarVuelo('disponiblesPrimera',vuelo.idVuelo,vuelo)">Reservar en Primera Clase</button>
+                                </h5>
+                                            <h5>Clase Ejecutiva {{vuelo.cuotaEjecutiva|currency}}
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesEjecutiva>0" ng-click="reservarVuelo('disponiblesEjecutiva',vuelo.idVuelo,vuelo)">Reservar en Clase Ejecutiva</button>
+                                </h5>
+                                            <h5>Clase Turista {{vuelo.cuotaTurista|currency}}
+                                    <button type="button" class="btn btn-primary " ng-if="vuelo.disponiblesTurista>0" ng-click="reservarVuelo('disponiblesTurista',vuelo.idVuelo,vuelo)">Reservar en Clase Turista</button>
+                                </h5>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <h4>Vuelo {{vuelo.numero}}: {{vuelo.origen}}-{{vuelo.destino}}</h4>
-                                    <p>Aerolínea: {{vuelo.aerolinea}}&emsp;&emsp;Fecha: {{vuelo.fecha}}&emsp;&emsp;Hora de salida: {{vuelo.horaSalida}}&emsp;&emsp;Hora de llegada: {{vuelo.horaLlegada}}</p>
-                                </div>
+
                             </div>
+
                         </div>
                         <div id="hoteles" ng-show="{{!hoteles}}" class="tab-pane fade">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <span class="fa-stack fa-3x">
-                                        <i class="fa fa-square-o fa-stack-2x"></i>
-                                        <i class="fa fa-bed fa-stack-1x"></i>
-                                    </span>
+                            <div class="row" ng-repeat="vuelo in vuelos" style="margin-top=30px;">
+
+                                <div class='col-xs-12'>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="img-rounded" src="" width="300" height="300" ng-src="{{vuelo.imgUrl}}" alt="Generic placeholder image">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><h2>Precio por dia:{{vuelo.precio|currency}} Total:{{consulta.dias*vuelo.precio|currency}}</h2>
+                                </h4>
+                                            <h4>Tipo habitación:{{vuelo.tipoHabitacion}}</h4>
+                                            <h4>Descripción:</h4>
+                                            <p>{{vuelo.descripcion}}</p>
+
+                                            <label for=""></label>
+                                            <button type="button" class="btn btn-primary form-control" ng-click="reservarVuelo(vuelo.idHabitacion)">Reservar</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <h4>{{hotel.nombre}}: {{hotel.habitacion.tipo}}</h4>
-                                    <p>Fecha: {{hotel.habitacion.fecha}}&emsp;&emsp;Noches: {{hotel.habitacion.noches}}&emsp;&emsp;Check-in: {{hotel.checkIn}}</p>
-                                </div>
+
                             </div>
                         </div>
                         <div id="autos" ng-show="{{!autos}}" class="tab-pane fade">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <span class="fa-stack fa-3x">
-                                        <i class="fa fa-square-o fa-stack-2x"></i>
-                                        <i class="fa fa-car fa-stack-1x"></i>
-                                    </span>
+                            <div class="row" ng-repeat="vuelo in vuelos" style="margin-top=30px;">
+
+                                <div class='col-xs-12'>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="img-rounded" src="" width="300" height="300" ng-src="{{vuelo.imgUrl}}" alt="Generic placeholder image">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><h2>Precio por dia:{{vuelo.precio|currency}} Total:{{consulta.dias*vuelo.precio|currency}}</h2>
+                                </h4>
+                                            <h4>Modelo:{{vuelo.modelo}}</h4>
+                                            <h4>Puertas:{{vuelo.puertas}}</h4>
+                                            <h4>Asientos:{{vuelo.asientos}}</h4>
+                                            <h4>Cajuela:{{vuelo.cajuela}}</h4>
+                                            <h4>Transmisión:{{vuelo.transmision}}</h4>
+                                            <h4>Aire:{{vuelo.aire}}</h4>
+                                            <label for=""></label>
+                                            <button type="button" class="btn btn-primary form-control" ng-click="reservarVuelo(vuelo.idAuto)">Reservar</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <h4>{{auto.modelo}}: {{auto.placa}}</h4>
-                                    <p>Agencia: {{carro.agencia}}&emsp;&emsp;Fecha de Renta: {{carro.fechaInicio}}&emsp;&emsp;Fecha de Entrega: {{carro.fechaEntrega}}</p>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -96,5 +134,113 @@
 
             <?php require('templates/footer.php');?>
     </body>
+    <script src="../bower_components/angular/angular.min.js "></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js "></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js "></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/Toaster/jquery.toaster.js"></script>
+    <script>
+        var app = angular.module('app', ['ngResource']);
+        //app.constant('baseURL', 'http://localhost:3000/');
+        app.constant('baseURL', 'http://localhost:8080/BDD_CD/public/api/');
+        app.directive("fileread", [function () {
+            return {
+                scope: {
+                    fileread: "="
+                }
+                , link: function (scope, element, attributes) {
+                    element.bind("change", function (changeEvent) {
+                        var reader = new FileReader();
+                        reader.onload = function (loadEvent) {
+                            scope.$apply(function () {
+                                scope.fileread = loadEvent.target.result;
+                            });
+                        }
+                        reader.readAsDataURL(changeEvent.target.files[0]);
+                    });
+                }
+            };
+        }]);
+        app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
+            this.getAutos = function () {
+                return $resource(baseURL + 'getReservacionesAutos.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+            this.getVuelos = function () {
+                return $resource(baseURL + 'getReservacionesVuelos.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+            this.getHabitaciones = function () {
+                return $resource(baseURL + 'getReservacionesHabitaciones.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+        }]);
+
+        app.controller('controller', ['$scope', 'factory', function ($scope, factory) {
+            $scope.cargando = true;
+            $scope.error = false;
+            $scope.seleccionado = "";
+            $scope.bandNuevo = false;
+            $scope.estados = [];
+            $scope.municipios = [];
+            $scope.nuevo = {
+                id: ""
+                , nombre: ""
+                , telefono: ""
+                , imagen: ""
+                , imgUrl: ""
+                , estdo: ""
+                , municipio: ""
+                , calle: ""
+                , numero: ""
+                , codigopostal: ""
+                , idEstado: ""
+                , idMunicipio: ""
+            };
+            var controller = this;
+            $scope.titulo = true;
+            $scope.lista = [];
+            this.serviceVuelos = factory.getVuelos();
+            this.serviceAutos = factory.getAutos();
+            this.serviceHabitaciones = factory.getHabitaciones();
+            /*--------------------------------Cargar Registros de inicio-------------------------*/
+            this.serviceAutos.query(
+                function (response) {
+                    console.log(response);
+                    $scope.autos = response;
+
+                }
+                , function (response) {});
+            this.serviceHabitaciones.query(
+                function (response) {
+                    $scope.habitaciones = response;
+
+                }
+                , function (response) {});
+
+            this.serviceVuelos.query(
+                function (response) {
+                    $scope.vuelos = response;
+
+                }
+                , function (response) {});
+
+
+
+
+
+
+
+        }]);
+    </script>
 
     </html>

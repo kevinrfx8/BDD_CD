@@ -13,6 +13,7 @@
         <!--Hojas de estilo-->
         <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" media="screen,projection" />
         <link href="assets/css/full-slider.css" rel="stylesheet">
+        <link href="../bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet">
         <!--Scripts externos-->
         <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
@@ -21,7 +22,7 @@
 
     <body>
         <?php require('templates/header.php');
-        if((isset($_SESSION['id']) && $_SESSION['tipo']==1)){//logeado y administrador
+        if((isset($_SESSION['id']) && $_SESSION['tipo']==0)){//logeado y administrador
             require('templates/indexAdmin.php');
         }
         else{

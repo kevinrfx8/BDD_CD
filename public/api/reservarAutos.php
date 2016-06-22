@@ -14,7 +14,7 @@ switch($method){
         $idAuto=$request->{'idAuto'};
         $fecha=$request->{'fecha'};
         $dias=$request->{'dias'};
-        $idUsuario=1;//lo sacará de la sesión
+        $idUsuario=$_SESSION['id'];
 
         $query="INSERT INTO reservaAuto (idAuto,idUsuario,fecha,dias) VALUES($idAuto,$idUsuario,STR_TO_DATE('$fecha', '%m/%d/%Y'),$dias)";
         $result=$connectionA -> query($query);

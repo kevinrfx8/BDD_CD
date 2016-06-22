@@ -13,7 +13,7 @@ switch($method){
         
         $tipo=$request->{'tipo'};
         $idVuelo=$request->{'idVuelo'};
-        $idUsuario=1;//lo sacará de la sesión
+        $idUsuario=$_SESSION['id'];
 
         $query="INSERT INTO reservaVuelo (idVuelo,idUsuario) VALUES($idVuelo,$idUsuario)";
         $result=$connectionA -> query($query);
