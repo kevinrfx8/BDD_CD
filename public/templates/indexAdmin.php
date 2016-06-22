@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container index">
     <h1>Panel de Administración</h1>
     <div class="row">
         <div class="col s12">

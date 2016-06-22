@@ -26,8 +26,8 @@
         }
         else{
             require('templates/indexUser.php');
-        }
             require('templates/footer.php');
+        }
         ?>
     </body>
 
