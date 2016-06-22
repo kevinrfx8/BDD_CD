@@ -10,13 +10,13 @@
         <meta http-equiv="Content-Language" content="es-mx" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Hojas de estilo-->
-        <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"  media="screen,projection"/>
-        <link href="public/assets/css/home.css" rel="stylesheet">
-        <link href="bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"  media="screen,projection"/>
+        <link href="assets/css/home.css" rel="stylesheet">
+        <link href="../bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet">
     <!--Scripts externos-->
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script> 
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script> 
-        <script src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script> 
+        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script> 
+        <script src="../bower_components/angular/angular.js"></script>
     </head>
     
     <body ng-app="">

@@ -38,7 +38,7 @@
 
     <body>
         <div style="z-index: -1;" id="bgDiv">
-            <img class="bg active" id="bg1" src="public/img/login1.jpg">
+            <img class="bg active" id="bg1" src="img/login1.jpg">
         </div>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
@@ -102,7 +102,7 @@
                 </div>
             </form>
         </div>
-        <a href="#" class="empresas"><small>Administradores</small></a>
+        <a href="admLogin.php" class="empresas"><small>Administradores</small></a>
     </body>
 
     </html>
