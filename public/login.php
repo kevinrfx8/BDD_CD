@@ -14,9 +14,6 @@
         <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" media="screen,projection" />
         <link href="assets/css/full-slider.css" rel="stylesheet">
         <!--Scripts externos-->
-        <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
-        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
-        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <!--Scripts propios de la página -->
         <script>
             function checkData() {
@@ -37,7 +34,7 @@
         <title>Login</title>
     </head>
 
-    <body>
+    <body ng-app="app" ng-controller="controller">
         <div style="z-index: -1;" id="bgDiv">
             <img class="bg active" id="bg1" src="img/login1.jpg">
         </div>
@@ -85,7 +82,7 @@
                     <div class="form-groupcol-sm-12 col-md-12 col-lg-5 center-block" style="float:none;">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-                            <input id="user" name="userID" type="text" class="form-control" placeholder="Nombre de usuario">
+                            <input id="user" name="userID" type="text" class="form-control" placeholder="Nombre de usuario" ng-model="consulta.nickname">
                         </div>
                     </div>
                 </div>
@@ -93,13 +90,15 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-5 center-block" style="float:none;">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
-                            <input id="pass" name="userPassword" type="password" class="form-control" placeholder="Contraseña">
+                            <input id="pass" name="userPassword" type="password" class="form-control" placeholder="Contraseña" ng-model="consulta.pass">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 center-block" style="float:none;">
-                        <input id="button" name="submit2" type="submit" class="btn btn-danger btn-block" value="Ingresar" />
+                        <button id="button" name="submit2" type="button" class="btn btn-danger btn-block" value="Ingresar" ng-click="ingresar()">
+                            Ingresar
+                        </button>
                     </div>
                 </div>
             </form>
@@ -110,5 +109,69 @@
             </div>
         </footer>
     </body>
+    <script src="../bower_components/angular/angular.min.js "></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js "></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js "></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/Toaster/jquery.toaster.js"></script>
+    <script>
+        var app = angular.module('app', ['ngResource']);
+        //app.constant('baseURL', 'http://localhost:3000/');
+        app.constant('baseURL', 'http://localhost:8080/BDD_CD/public/api/');
+        app.directive("fileread", [function () {
+            return {
+                scope: {
+                    fileread: "="
+                }
+                , link: function (scope, element, attributes) {
+                    element.bind("change", function (changeEvent) {
+                        var reader = new FileReader();
+                        reader.onload = function (loadEvent) {
+                            scope.$apply(function () {
+                                scope.fileread = loadEvent.target.result;
+                            });
+                        }
+                        reader.readAsDataURL(changeEvent.target.files[0]);
+                    });
+                }
+            };
+        }]);
+        app.service('factory', ['$resource', 'baseURL', function ($resource, baseURL) {
+            this.getInfo = function () {
+                return $resource(baseURL + 'checkUser.php', null, {
+                    'update': {
+                        method: 'PUT'
+                    }
+                });
+            };
+        }]);
+
+        app.controller('controller', ['$scope', 'factory', function ($scope, factory) {
+            $scope.consulta = {
+                nickname: ""
+                , pass: ""
+
+            }
+            var controller = this;
+            this.service = factory.getInfo();
+            $scope.ingresar = function () {
+                console.log($scope.consulta);
+                controller.service.save($scope.consulta).$promise.then(function (response) {
+
+                    console.log(response);
+                    if (response.estado) {
+                        location.href = "index.php";
+                    } else {
+                        $.toaster({
+                            priority: 'warning'
+                            , title: 'Error'
+                            , message: 'Credenciales no validas'
+                        });
+                    }
+
+                });
+            };
+        }]);
+    </script>
 
     </html>
