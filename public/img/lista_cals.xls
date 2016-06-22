@@ -1,0 +1,299 @@
+
+
+
+  
+
+  
+    <b> <span class="Titulo">Captura de Calificaciones Finales
+
+	  </span> 
+  </b> 
+  
+<b> </b> <b> </b> 
+<table width="90%" border="1" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="1" align="center" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td width="12%" class="EtiquetaEnc" >Curso:</td>
+          <td class="Dencabezado" colspan="2">Curso Extensivo</td>
+        </tr>
+        <tr> 
+          <td width="12%" class="EtiquetaEnc" >Materia:</td>
+          <td width="5%" class="Dencabezado">5417</td>
+          <td width="83%" class="Dencabezado">JAPONES III</td>
+        </tr>
+        <tr> 
+          <td width="12%" class="EtiquetaEnc" >Grupo:</td>
+          <td class="Dencabezado" colspan="2">B</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+  
+<table width="90%" border="1" align="center" cellspacing="0">
+  <tr> 
+    <td width="8%" class="Etiqueta" rowspan="2"  > 
+      <div align="center">Id. Personal</div>
+    </td>
+    <td width="38%" class="Etiqueta" rowspan="2"> 
+      <div align="center"> Alumno</div>
+    </td>
+    <td width="5%" class="Etiqueta" rowspan="2"> 
+      <div align="center"> Calificaci&oacute;n Final</div>
+    </td>
+  </tr>
+  <tr> </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">116358</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        ALONSO FERNANDEZ ANA PATRICIA
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">116359</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        ALONSO FERNANDEZ MARIA FERNANDA
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">150897</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        CASTORENA DELGADILLO JOSE ALBERTO
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        9
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">167302</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        CENTENO GARCIA LAURA ALICIA
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">166786</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        CERVANTES HERNANDEZ NESTOR
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        7
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">163394</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        DE LA CRUZ FLORES CESAR ANDRES
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        8
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">152389</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        GONZALEZ CASTRO LUIS EMILIO
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        9
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">144881</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        GUERRERO CARRILLO GISELA
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">137176</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        JIMENEZ MORENO KARLA DILEA
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">193491</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        JUAREZ CORREA ROSA MA.
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">209296</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        MUÑOZ TREVIÑO JULIO CESAR
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        9
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">177147</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        RUIZ RIVAS SERGIO
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+  <tr> 
+    
+    <td width="8%" class="Dinforma"> 
+      <div align="left">140768</div>
+    </td>
+    <td width="38%" class="Dinforma"> 
+      <div align="left"> 
+        TORRES CARBAJAL KARINA ROCIO
+
+      </div>
+    </td>
+    <td width="5%" class="Dinforma"> 
+      <div align="center"> 
+        10
+
+      </div>
+    </td>
+  </tr>
+  
+</table>
+    
