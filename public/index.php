@@ -13,7 +13,6 @@
         <!--Hojas de estilo-->
         <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" media="screen,projection" />
         <link href="assets/css/full-slider.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/style.css">
         <!--Scripts externos-->
         <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
@@ -30,9 +29,6 @@
         }
             require('templates/footer.php');
         ?>
-
-
-
     </body>
 
     </html>

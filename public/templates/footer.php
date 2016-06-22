@@ -1,5 +1,5 @@
 <footer class="footer">
     <div class="container">
-        <p class="text-muted">Place sticky footer content here.</p>
+        <a href="admLogin.php" class="text-muted text-centered">Haga clic aquí para iniciar sesión como administrador.</a>
     </div>
 </footer>

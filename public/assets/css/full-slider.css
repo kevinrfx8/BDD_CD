@@ -13,6 +13,8 @@ body {
 .item,
 .active {
     height: 100%;
+    margin-bottom: -50px;
+    z-index: -1;
 }
 
 .carousel-inner {
@@ -29,10 +31,7 @@ body {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-}
-
-footer {
-    margin: 50px 0;
+    
 }
 
 .carousel-caption h2{
@@ -52,4 +51,12 @@ footer {
 
 .navbar-inner{
     text-align:center;
+}
+footer{
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 30px;
+    bottom: 0;
+    position: absolute;
+    text-align: center;
 }

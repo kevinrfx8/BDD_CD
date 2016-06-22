@@ -10,13 +10,13 @@
         <meta http-equiv="Content-Language" content="es-mx" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Hojas de estilo-->
-        <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"  media="screen,projection"/>
-        <link href="public/assets/css/home.css" rel="stylesheet">
-        <link href="bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"  media="screen,projection"/>
+        <link href="assets/css/home.css" rel="stylesheet">
+        <link href="../bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet">
     <!--Scripts externos-->
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script> 
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script> 
-        <script src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script> 
+        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script> 
+        <script src="../bower_components/angular/angular.js"></script>
     </head>
     
     <body ng-app="">
@@ -43,21 +43,12 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Mis reservaciones</a></li>
-                                    <li><a href="#">Mi cuenta</a></li>
-                                    <li><a href="#">Ayuda</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Cerrar sesión</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="login.php">Iniciar sesión</a></li>
                         </ul>
 
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" placeholder="Buscar">
                             </div>
                             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                         </form>

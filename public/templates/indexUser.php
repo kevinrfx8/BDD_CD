@@ -1,5 +1,4 @@
 <header id="myCarousel" class="carousel slide">
-
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
