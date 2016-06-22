@@ -61,5 +61,13 @@ footer{
     text-align: center;
 }
 .index{
-    
+    top: 50px;
+    position: absolute;
+}
+.pane{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    padding-bottom: 7px !important;
+    padding-top: 10px !important;
+    margin-bottom: 10px !important;
 }

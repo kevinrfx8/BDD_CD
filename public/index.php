@@ -13,6 +13,7 @@
         <!--Hojas de estilo-->
         <link type="text/css" rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" media="screen,projection" />
         <link href="assets/css/full-slider.css" rel="stylesheet">
+        <link href="../bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet">
         <!--Scripts externos-->
         <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
